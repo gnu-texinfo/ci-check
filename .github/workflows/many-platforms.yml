@@ -140,7 +140,7 @@ jobs:
             pwd
             : "Install CentOS Linux packages"
             : "List of packages: http://mirror.centos.org/centos/7/os/x86_64/Packages/"
-            yum -y install make gcc
+            yum -y install make gcc perl
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
@@ -181,7 +181,7 @@ jobs:
             pwd
             : "Install Alpine Linux packages"
             : "List of packages: https://pkgs.alpinelinux.org/packages"
-            apk add make gcc musl-dev
+            apk add make gcc musl-dev perl
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
@@ -268,7 +268,7 @@ jobs:
             pwd
             : "Install FreeBSD packages"
             : "List of packages: https://ports.freebsd.org/cgi/ports.cgi"
-            : pkg install -y ...
+            pkg install -y perl5
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
@@ -312,7 +312,7 @@ jobs:
             pwd
             : "Install NetBSD packages"
             : "List of packages: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/index-all.html"
-            : /usr/sbin/pkg_add ...
+            /usr/sbin/pkg_add perl
             : "or"
             : /usr/sbin/pkg_add pkgin
             : pkgin install ...
