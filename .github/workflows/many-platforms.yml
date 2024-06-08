@@ -222,10 +222,12 @@ jobs:
       - run: pwd
       # Install Homebrew packages.
       # List of packages: https://formulae.brew.sh/
-      # - run: brew install ...
+      - run: ${{ matrix.os == 'macos-14' && 'brew install gettext' || ':' }}
       - run: |
           pwd
-          export CPPFLAGS="-Wall"
+          ls -l ${HOMEBREW_PREFIX-/usr/local}/opt
+          export CPPFLAGS="-I$HOME/include -I${HOMEBREW_PREFIX-/usr/local}/opt/gettext/include -Wall"
+          export LDFLAGS="-L$HOME/lib -L${HOMEBREW_PREFIX-/usr/local}/opt/gettext/lib"
           ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
