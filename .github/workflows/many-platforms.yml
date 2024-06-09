@@ -252,6 +252,8 @@ jobs:
           ls -l ${HOMEBREW_PREFIX-/usr/local}/opt
           export CPPFLAGS="-I$HOME/include -I${HOMEBREW_PREFIX-/usr/local}/opt/gettext/include -Wall"
           export LDFLAGS="-L$HOME/lib -L${HOMEBREW_PREFIX-/usr/local}/opt/gettext/lib"
+          export PERL_EXT_CPPFLAGS="$CPPFLAGS"
+          export PERL_EXT_LDFLAGS="$LDFLAGS"
           ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -306,6 +308,8 @@ jobs:
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
+            export PERL_EXT_CPPFLAGS="$CPPFLAGS"
+            export PERL_EXT_LDFLAGS="$LDFLAGS"
             ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
