@@ -115,6 +115,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   check-linux-gnu-centos:
@@ -156,6 +164,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   check-linux-alpine:
@@ -197,6 +213,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   check-macos:
@@ -240,6 +264,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   check-freebsd:
@@ -286,6 +318,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   check-netbsd:
@@ -333,6 +373,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   check-openbsd:
@@ -382,6 +430,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   check-solaris11:
@@ -429,6 +485,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   check-solaris11-omnios:
@@ -474,6 +538,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   check-cygwin:
@@ -535,6 +607,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   check-mingw:
@@ -599,6 +679,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   check-msvc:
@@ -700,6 +788,14 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
   # This is not a platform-specific test, but very useful for finding bugs.
@@ -740,5 +836,13 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/log[123]
+            ${{ env.package }}-*/build/info/test-suite.log
+            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/tp/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/test-suite.log
+            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}-*/build/texindex/test-suite.log
+            ${{ env.package }}-*/build/util/test-suite.log
           retention-days: 7
           overwrite: true
