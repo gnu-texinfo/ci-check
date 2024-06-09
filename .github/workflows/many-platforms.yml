@@ -148,7 +148,7 @@ jobs:
             pwd
             : "Install CentOS Linux packages"
             : "List of packages: http://mirror.centos.org/centos/7/os/x86_64/Packages/"
-            yum -y install make gcc perl
+            yum -y install make gcc perl perl-Encode perl-Data-Dumper perl-Unicode-String
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
