@@ -30,6 +30,11 @@ packagedir=`echo "$tarfile" | sed -e 's/\.tar\.gz$//'`
 tar xfz "$tarfile"
 cd "$packagedir" || exit 1
 
+# Work around a /bin/sh bug on Solaris 11 OmniOS.
+if test "`uname -s`" = SunOS && ! grep 'Oracle Solaris' /etc/release >/dev/null; then
+  sed -i -e '1s|/bin/sh|/usr/bin/bash|' tp/tests/run_parser_all.sh
+fi
+
 mkdir build
 cd build
 
