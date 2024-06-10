@@ -418,7 +418,7 @@ jobs:
             pwd
             : "Install OpenBSD packages"
             : "List of packages: https://cdn.openbsd.org/pub/OpenBSD/7.5/packages/amd64/"
-            pkg_add gawk
+            pkg_add gawk help2man
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
