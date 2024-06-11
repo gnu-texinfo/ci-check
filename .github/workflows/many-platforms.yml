@@ -358,7 +358,7 @@ jobs:
             pwd
             : "Install NetBSD packages"
             : "List of packages: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/index-all.html"
-            /usr/sbin/pkg_add perl
+            /usr/sbin/pkg_add perl gettext-lib p5-Locale-libintl p5-gettext
             : "or"
             : /usr/sbin/pkg_add pkgin
             : pkgin install ...
