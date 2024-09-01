@@ -930,7 +930,7 @@ jobs:
             pwd
             : "Install Debian packages."
             : "List of packages: https://packages.debian.org/"
-            : "apt update; apt install ..."
+            : "apt update; apt -y install ..."
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
