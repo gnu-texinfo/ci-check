@@ -24,8 +24,8 @@ package="$1"
 set -e
 
 # Fetch sources (uses package 'git').
-#git clone --depth 1 --branch release/7.1 https://git.savannah.gnu.org/git/"$package".git
-git clone --depth 1 https://git.savannah.gnu.org/git/"$package".git
+git clone --depth 1 --branch release/7.1 https://git.savannah.gnu.org/git/"$package".git
+#git clone --depth 1 https://git.savannah.gnu.org/git/"$package".git
 
 cd "$package"
 
