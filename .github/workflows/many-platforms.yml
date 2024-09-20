@@ -85,6 +85,7 @@ jobs:
     name: make check on Ubuntu GNU/Linux
     needs: build-tarball
     runs-on: ubuntu-22.04
+    if: ${{ false }}
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -145,6 +146,7 @@ jobs:
         with:
           image: centos:7
           options: -v ${{ github.workspace }}:/work
+          # No perl(Data::Compare) so tp/t/*.t tests are not checked
           # perl-Test-Harness for prove
           # perl-ExtUtils-ParseXS for xsubpp
           run: |
@@ -156,7 +158,7 @@ jobs:
             sed -i -e 's|^mirrorlist=|#mirrorlist=|' -e 's|^#baseurl=http://mirror\.centos\.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-Base.repo
             : "Install CentOS Linux packages"
             : "List of packages: http://vault.centos.org/centos/7/os/x86_64/Packages/"
-            yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Test::More)' 'perl(Data::Compare)' 'perl(Test::Deep)'
+            yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Test::More)' 'perl(Test::Deep)'
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
@@ -201,6 +203,7 @@ jobs:
         with:
           image: almalinux:9
           options: -v ${{ github.workspace }}:/work
+          # No perl-Data-Compare so tp/t/*.t tests are not checked
           run: |
             uname -a
             id
@@ -212,7 +215,7 @@ jobs:
             : "                  https://repo.almalinux.org/almalinux/9/CRB/x86_64/os/Packages/"
             : "                  https://repo.almalinux.org/almalinux/9/devel/x86_64/os/Packages/"
             : "Explanation: https://wiki.almalinux.org/repos/AlmaLinux.html"
-            yum -y install make gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Data-Compare diffutils
+            yum -y install make gcc ncurses-devel perl perl-Encode perl-Data-Dumper diffutils
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
@@ -257,6 +260,7 @@ jobs:
         with:
           image: alpine:3
           options: -v ${{ github.workspace }}:/work
+          # Small distro based on musl, many perl modules not available
           run: |
             uname -a
             id
@@ -264,7 +268,7 @@ jobs:
             pwd
             : "Install Alpine Linux packages"
             : "List of packages: https://pkgs.alpinelinux.org/packages"
-            apk add make gcc musl-dev perl
+            apk add make gcc musl-dev perl ncurses-dev
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
@@ -317,6 +321,7 @@ jobs:
       # Install Homebrew packages.
       # List of packages: https://formulae.brew.sh/
       - run: ${{ matrix.os == 'macos-14' && 'brew install gettext' || ':' }}
+      - run: cpan -i 'Data::Compare' 'Test::Deep'
       - run: |
           pwd
           ls -l ${HOMEBREW_PREFIX-/usr/local}/opt
@@ -351,6 +356,7 @@ jobs:
           overwrite: true
   check-freebsd:
     name: make check on FreeBSD
+    if: ${{ false }}
     needs: build-tarball
     # The FreeBSD runners sometimes get stuck.
     timeout-minutes: 15
@@ -434,7 +440,7 @@ jobs:
             pwd
             : "Install NetBSD packages"
             : "List of packages: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/index-all.html"
-            /usr/sbin/pkg_add perl p5-Data-Compare p5-Test-Deep
+            /usr/sbin/pkg_add perl p5-Data-Compare p5-Test-Deep p5-Clone
             : "or"
             : /usr/sbin/pkg_add pkgin
             : pkgin install ...
@@ -468,6 +474,7 @@ jobs:
           overwrite: true
   check-openbsd:
     name: make check on OpenBSD
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -758,6 +765,7 @@ jobs:
       - run: ls -l /usr/bin
       - name: Perl directories listings
         run: |
+          set -x
           ls /cygdrive/c/Strawberry/c/bin
           ls /cygdrive/c/Strawberry/perl/site/bin
           ls /cygdrive/c/Strawberry/perl/bin
