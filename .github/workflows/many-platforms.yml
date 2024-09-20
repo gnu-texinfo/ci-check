@@ -100,6 +100,7 @@ jobs:
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
       # - run: sudo apt update; sudo apt install ...
+      - run: sudo apt update; sudo apt install libdata-compare-perl
       - run: |
           pwd
           export CPPFLAGS="-Wall"
@@ -153,7 +154,9 @@ jobs:
             sed -i -e 's|^mirrorlist=|#mirrorlist=|' -e 's|^#baseurl=http://mirror\.centos\.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-Base.repo
             : "Install CentOS Linux packages"
             : "List of packages: http://vault.centos.org/centos/7/os/x86_64/Packages/"
-            yum -y install make gcc perl perl-Encode perl-Data-Dumper perl-Unicode-String
+      # perl-Test-Harness for prove
+      # perl-ExtUtils-ParseXS for xsubpp
+            yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Test::More)'
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
@@ -209,7 +212,7 @@ jobs:
             : "                  https://repo.almalinux.org/almalinux/9/CRB/x86_64/os/Packages/"
             : "                  https://repo.almalinux.org/almalinux/9/devel/x86_64/os/Packages/"
             : "Explanation: https://wiki.almalinux.org/repos/AlmaLinux.html"
-            yum -y install make gcc perl perl-Encode perl-Data-Dumper diffutils
+            yum -y install make gcc ncurses-devel perl perl-Encode perl-Data-Dumper 'perl(Data::Compare)' diffutils
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
@@ -374,7 +377,7 @@ jobs:
             pwd
             : "Install FreeBSD packages"
             : "List of packages: https://ports.freebsd.org/cgi/ports.cgi"
-            pkg install -y perl5 gettext-runtime
+            pkg install -y perl5 gettext-runtime p5-Data-Compare
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
@@ -431,7 +434,7 @@ jobs:
             pwd
             : "Install NetBSD packages"
             : "List of packages: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/index-all.html"
-            /usr/sbin/pkg_add perl
+            /usr/sbin/pkg_add perl p5-Data-Compare
             : "or"
             : /usr/sbin/pkg_add pkgin
             : pkgin install ...
@@ -494,7 +497,7 @@ jobs:
             pwd
             : "Install OpenBSD packages"
             : "List of packages: https://cdn.openbsd.org/pub/OpenBSD/7.5/packages/amd64/"
-            pkg_add gawk help2man
+            pkg_add gawk help2man p5-Data-Compare
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
@@ -667,7 +670,7 @@ jobs:
           platform: ${{ matrix.bitness == 32 && 'x86' || 'x86_64' }}
           # Install Cygwin packages.
           # List of packages: https://cygwin.com/packages/package_list.html
-          packages: gcc-core make perl
+          packages: gcc-core make perl perl-Data-Compare libncurses-devel libcrypt-devel
       - name: cygcheck
         run: cygcheck -V
       - name: cygcheck
