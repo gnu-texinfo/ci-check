@@ -145,6 +145,8 @@ jobs:
         with:
           image: centos:7
           options: -v ${{ github.workspace }}:/work
+          # perl-Test-Harness for prove
+          # perl-ExtUtils-ParseXS for xsubpp
           run: |
             uname -a
             id
@@ -154,8 +156,6 @@ jobs:
             sed -i -e 's|^mirrorlist=|#mirrorlist=|' -e 's|^#baseurl=http://mirror\.centos\.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-Base.repo
             : "Install CentOS Linux packages"
             : "List of packages: http://vault.centos.org/centos/7/os/x86_64/Packages/"
-      # perl-Test-Harness for prove
-      # perl-ExtUtils-ParseXS for xsubpp
             yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Test::More)'
             cd /work
             ls -l
