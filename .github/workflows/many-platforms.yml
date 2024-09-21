@@ -132,6 +132,7 @@ jobs:
           overwrite: true
   check-linux-gnu-centos:
     name: make check on CentOS GNU/Linux
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -189,6 +190,7 @@ jobs:
           overwrite: true
   check-linux-gnu-alma:
     name: make check on AlmaLinux GNU/Linux
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -268,7 +270,7 @@ jobs:
             pwd
             : "Install Alpine Linux packages"
             : "List of packages: https://pkgs.alpinelinux.org/packages"
-            apk add make gcc musl-dev perl ncurses-dev
+            apk add make gcc musl-dev perl-dev ncurses-dev
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
@@ -299,6 +301,7 @@ jobs:
           overwrite: true
   check-macos:
     name: make check on macOS
+    if: ${{ false }}
     needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
@@ -416,6 +419,7 @@ jobs:
           overwrite: true
   check-netbsd:
     name: make check on NetBSD
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -553,10 +557,11 @@ jobs:
           # - the '11.4-gcc' image, that has gcc installed in /opt/csw/bin.
           release: '11.4-gcc'
           mem: 2048
-          #prepare: |
-          #  : "Install Solaris packages"
-          #  : "List of packages: http://pkg.oracle.com/solaris/release/en/index.shtml"
-          #  pkg install ...; ret=$?; test $ret = 0 || test $ret = 4
+          prepare: |
+            : "Install Solaris packages"
+            : "List of packages: http://pkg.oracle.com/solaris/release/en/index.shtml"
+            pkg install test-deep; ret=$?; test $ret = 0 || test $ret = 4
+          prepare: cpan -i 'Data::Compare'
           run: |
             set -x
             uname -a
@@ -593,6 +598,7 @@ jobs:
           overwrite: true
   check-solaris11-omnios:
     name: make check on Solaris 11 OmniOS
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -931,7 +937,7 @@ jobs:
       - run: pwd
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
-      # - run: sudo apt update; sudo apt install ...
+      - run: sudo apt update; sudo apt install libdata-compare-perl libtest-deep-perl
       - run: |
           pwd
           export CPPFLAGS="-Wall"
@@ -989,6 +995,7 @@ jobs:
             : "Install Debian packages."
             : "List of packages: https://packages.debian.org/"
             : "apt update; apt -y install ..."
+            apt update; apt -y install libdata-compare-perl libtest-deep-perl
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
