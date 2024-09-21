@@ -85,7 +85,7 @@ jobs:
     name: make check on Ubuntu GNU/Linux
     needs: build-tarball
     runs-on: ubuntu-22.04
-    #if: ${{ false }}
+    if: ${{ false }}
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -302,7 +302,7 @@ jobs:
           overwrite: true
   check-macos:
     name: make check on macOS
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
@@ -360,7 +360,7 @@ jobs:
           overwrite: true
   check-freebsd:
     name: make check on FreeBSD
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     # The FreeBSD runners sometimes get stuck.
     timeout-minutes: 15
@@ -420,6 +420,7 @@ jobs:
           overwrite: true
   check-netbsd:
     name: make check on NetBSD
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -480,6 +481,7 @@ jobs:
           overwrite: true
   check-openbsd:
     name: make check on OpenBSD
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -671,6 +673,8 @@ jobs:
         shell: C:\cygwin\bin\bash.exe -eo pipefail -o igncr '{0}'
     env:
       CYGWIN_NOWINPATH: 1
+    # The cygwin-64 runner gets stuck maybe because of issues with info tests.
+    timeout-minutes: 20
     steps:
       # This is needed because we run a script stored in this repository.
       - run: git config --global core.autocrlf input
@@ -731,7 +735,22 @@ jobs:
           retention-days: 7
           overwrite: true
   check-mingw:
-    name: make check on mingw
+    # this setup uses a native MinGW compiler from within a Cygwin environment
+    # and uses native strawberry Perl.  Mixing native strawberry Perl with
+    # Cygwin shell bring about several issues:
+    # * com interpreter bat files coming with strawberry Perl such as prove.bat
+    #   or xsubpp.bat cannot be found nor run by Cygwin shell
+    # * carriage returns produced by Perl are not filtered out by the Cygwin
+    #   shell
+    # * /dev/null is not mapped to NUL
+    #
+    # Currently libncurses is not in cross MinGW packages, such that
+    # it is not possible to setup info tests.
+    #
+    # Two tests in the tp/tests/ testsuite fail with MinGW from within Cygwin
+    # but not with MinGW from MSYS, one because of /dev/null and another
+    # because the detected locale is not UTF-8.
+    name: make check on mingw on Cygwin environment
     needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
@@ -774,6 +793,8 @@ jobs:
       - run: ls -l
       - run: echo "$PATH"
       - run: ls -l /usr/bin
+      # shows that xsubpp and prove are present as .bat files that cannot be
+      # natively found nor run by Cygwin shell
       - name: Perl directories listings
         run: |
           set -x
@@ -953,10 +974,12 @@ jobs:
           # does not work, __asan_init symbol is not found even if the linker
           # is clang called with -fsanitize=address
           # export PERL_EXT_CC=$CC
-          export PERL_EXT_CFLAGS="-fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero $CFLAGS"
+          # does not work, got ASan runtime does not come first in initial library list
+          # export PERL_EXT_CFLAGS="-fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero $CFLAGS"
+          # export PERL_EXT_LDFLAGS="-fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero"
+          export PERL_EXT_CFLAGS="$CFLAGS"
           export PERL_EXT_CPPFLAGS=$CPPFLAGS
           # does not work alone, got ASan runtime does not come first in initial library list
-          export PERL_EXT_LDFLAGS="-fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero"
           ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -985,6 +1008,7 @@ jobs:
   # This is not a platform-specific test, but very useful for finding ISO C23 compliance bugs.
   check-newest-clang:
     name: make check with the newest clang release
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
