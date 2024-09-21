@@ -85,7 +85,7 @@ jobs:
     name: make check on Ubuntu GNU/Linux
     needs: build-tarball
     runs-on: ubuntu-22.04
-    if: ${{ false }}
+    #if: ${{ false }}
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -950,9 +950,12 @@ jobs:
           export CC="clang -fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero"
           export CFLAGS="-O0 -fno-omit-frame-pointer -ggdb"
           export ASAN_OPTIONS="detect_leaks=0 abort_on_error=1 allocator_may_return_null=1"
-          export PERL_EXT_CC=$CC
+          # does not work, __asan_init symbol is not found even if the linker
+          # is clang called with -fsanitize=address
+          # export PERL_EXT_CC=$CC
           export PERL_EXT_CFLAGS=$CFLAGS
           export PERL_EXT_CPPFLAGS=$CPPFLAGS
+          export PERL_EXT_LDFLAGS="-fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero"
           ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
