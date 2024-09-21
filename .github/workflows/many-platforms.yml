@@ -248,6 +248,7 @@ jobs:
           overwrite: true
   check-linux-alpine:
     name: make check on Alpine Linux
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -419,7 +420,6 @@ jobs:
           overwrite: true
   check-netbsd:
     name: make check on NetBSD
-    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -451,6 +451,8 @@ jobs:
             ls -l
             export CPPFLAGS="-I/usr/pkg/include -Wall"
             export LDFLAGS="-L/usr/pkg/lib"
+            export PERL_EXT_CPPFLAGS="$CPPFLAGS"
+            export PERL_EXT_LDFLAGS="$LDFLAGS"
             ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -478,7 +480,6 @@ jobs:
           overwrite: true
   check-openbsd:
     name: make check on OpenBSD
-    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -512,6 +513,8 @@ jobs:
             ls -l
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
+            export PERL_EXT_CPPFLAGS="$CPPFLAGS"
+            export PERL_EXT_LDFLAGS="$LDFLAGS"
             ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -571,6 +574,7 @@ jobs:
             ls -l
             export CPPFLAGS="-Wall"
             export CC="gcc -m64"
+            export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -598,7 +602,6 @@ jobs:
           overwrite: true
   check-solaris11-omnios:
     name: make check on Solaris 11 OmniOS
-    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -628,6 +631,7 @@ jobs:
             pwd
             ls -l
             export CPPFLAGS="-Wall"
+            export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '' 'gmake'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -700,6 +704,7 @@ jobs:
       - name: Build in Cygwin
         run: |
           export CPPFLAGS="-Wall"
+          export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -779,8 +784,9 @@ jobs:
         run: |
           set -x
           PATH=/usr/${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32/sys-root/mingw/bin:$PATH
-          export CPPFLAGS="-Wall"
           export CC=${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32-gcc
+          export CPPFLAGS="-Wall"
+          export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           ./build-on.sh '${{ env.package }}' '--host=${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -944,6 +950,9 @@ jobs:
           export CC="clang -fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero"
           export CFLAGS="-O0 -fno-omit-frame-pointer -ggdb"
           export ASAN_OPTIONS="detect_leaks=0 abort_on_error=1 allocator_may_return_null=1"
+          export PERL_EXT_CC=$CC
+          export PERL_EXT_CFLAGS=$CFLAGS
+          export PERL_EXT_CPPFLAGS=$CPPFLAGS
           ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -998,8 +1007,10 @@ jobs:
             apt update; apt -y install libdata-compare-perl libtest-deep-perl
             cd /work
             ls -l
-            export CPPFLAGS="-Wall"
             export CC=clang
+            export CPPFLAGS="-Wall"
+            export PERL_EXT_CC=$CC
+            export PERL_EXT_CPPFLAGS=$CPPFLAGS
             ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
