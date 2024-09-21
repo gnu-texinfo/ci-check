@@ -953,8 +953,9 @@ jobs:
           # does not work, __asan_init symbol is not found even if the linker
           # is clang called with -fsanitize=address
           # export PERL_EXT_CC=$CC
-          export PERL_EXT_CFLAGS=$CFLAGS
+          export PERL_EXT_CFLAGS="-fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero $CFLAGS"
           export PERL_EXT_CPPFLAGS=$CPPFLAGS
+          # does not work alone, got ASan runtime does not come first in initial library list
           export PERL_EXT_LDFLAGS="-fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero"
           ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
