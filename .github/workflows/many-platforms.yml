@@ -662,6 +662,7 @@ jobs:
           retention-days: 7
           overwrite: true
   check-cygwin:
+    # NOTE 32 bits Cygwin environment is no longer maintained
     name: make check on Cygwin
     #if: ${{ false }}
     needs: build-tarball
@@ -676,7 +677,8 @@ jobs:
         shell: C:\cygwin\bin\bash.exe -eo pipefail -o igncr '{0}'
     env:
       CYGWIN_NOWINPATH: 1
-    # The cygwin-64 runner gets stuck maybe because of issues with info tests.
+    # The cygwin-64 runner got stuck probably because of issues with
+    # info tests with pseudotty.
     timeout-minutes: 20
     steps:
       # This is needed because we run a script stored in this repository.
@@ -709,10 +711,12 @@ jobs:
       - run: echo "$PATH"
       - run: ls -l /usr/bin
       - name: Build in Cygwin
+        # We disable tests requiring pseudotty as they fail in the CI.
+        # They do not fail when run by the Cygwin Texinfo maintainer.
         run: |
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-          ./build-on.sh '${{ env.package }}' '' 'make'
+          ./build-on.sh '${{ env.package }}' '--disable-ptys-tests' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -753,7 +757,7 @@ jobs:
     # Two tests in the tp/tests/ testsuite fail with MinGW from within Cygwin
     # but not with MinGW from MSYS, one because of /dev/null and another
     # because the detected locale is not UTF-8.
-    name: make check on mingw on Cygwin environment
+    name: check MinGW on Cygwin
     #if: ${{ false }}
     needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
@@ -984,7 +988,6 @@ jobs:
           # export PERL_EXT_LDFLAGS="-fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero"
           export PERL_EXT_CFLAGS="$CFLAGS"
           export PERL_EXT_CPPFLAGS=$CPPFLAGS
-          # does not work alone, got ASan runtime does not come first in initial library list
           ./build-on.sh '${{ env.package }}' '' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
