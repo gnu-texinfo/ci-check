@@ -308,7 +308,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-12, macos-13, macos-14]
+        os: [macos-12, macos-13, macos-14, macos-15]
     runs-on: ${{ matrix.os }}
     steps:
       # This is needed because we run a script stored in this repository.
@@ -324,7 +324,7 @@ jobs:
       - run: pwd
       # Install Homebrew packages.
       # List of packages: https://formulae.brew.sh/
-      - run: ${{ matrix.os == 'macos-14' && 'brew install gettext' || ':' }}
+      - run: ${{ (matrix.os == 'macos-14' || matrix.os == 'macos-15') && 'brew install gettext' || ':' }}
       - run: cpan -i 'Data::Compare' 'Test::Deep'
       - run: |
           pwd
