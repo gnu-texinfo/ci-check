@@ -322,9 +322,13 @@ jobs:
       - run: id
       - run: env | LC_ALL=C sort
       - run: pwd
+      # for macos-14 and macos-15 system iconv is found, but is found by
+      # configure not to be a working iconv.  Installing libiconv from
+      # brew is not enough to make it work, as brew does not override system
+      # libraries by default.
       # Install Homebrew packages.
       # List of packages: https://formulae.brew.sh/
-      - run: ${{ (matrix.os == 'macos-14' || matrix.os == 'macos-15') && 'brew install gettext libiconv' || ':' }}
+      - run: ${{ (matrix.os == 'macos-14' || matrix.os == 'macos-15') && 'brew install gettext' || ':' }}
       - run: cpan -i 'Data::Compare' 'Test::Deep'
       - run: |
           pwd
