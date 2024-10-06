@@ -324,7 +324,7 @@ jobs:
       - run: pwd
       # Install Homebrew packages.
       # List of packages: https://formulae.brew.sh/
-      - run: ${{ (matrix.os == 'macos-14' || matrix.os == 'macos-15') && 'brew install gettext' || ':' }}
+      - run: ${{ (matrix.os == 'macos-14' || matrix.os == 'macos-15') && 'brew install gettext libiconv' || ':' }}
       - run: cpan -i 'Data::Compare' 'Test::Deep'
       - run: |
           pwd
@@ -695,8 +695,10 @@ jobs:
         with:
           platform: ${{ matrix.bitness == 32 && 'x86' || 'x86_64' }}
           # Install Cygwin packages.
+          # libiconv-devel is brought in as a dependency on x86_64, not on
+          # x86.
           # List of packages: https://cygwin.com/packages/package_list.html
-          packages: gcc-core make perl perl-Data-Compare perl-Test-Deep libncurses-devel libcrypt-devel
+          packages: gcc-core make perl perl-Data-Compare perl-Test-Deep libncurses-devel libcrypt-devel libiconv-devel
       - name: cygcheck
         run: cygcheck -V
       - name: cygcheck
