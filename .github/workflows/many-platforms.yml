@@ -371,7 +371,7 @@ jobs:
     #if: ${{ false }}
     needs: build-tarball
     # The FreeBSD runners sometimes get stuck.
-    timeout-minutes: 15
+    timeout-minutes: 20
     runs-on: ubuntu-22.04
     steps:
       # This is needed because we run a script stored in this repository.
@@ -690,9 +690,9 @@ jobs:
         shell: C:\cygwin\bin\bash.exe -eo pipefail -o igncr '{0}'
     env:
       CYGWIN_NOWINPATH: 1
-    # The cygwin-64 runner got stuck probably because of issues with
+    # The cygwin-64 runner got stuck before probably because of issues with
     # info tests with pseudotty.
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       # This is needed because we run a script stored in this repository.
       - run: git config --global core.autocrlf input
