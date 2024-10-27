@@ -642,6 +642,7 @@ jobs:
             env | LC_ALL=C sort
             pwd
             ls -l
+            export CONFIG_SHELL=/usr/bin/bash
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '' 'gmake'
