@@ -160,7 +160,7 @@ jobs:
             sed -i -e 's|^mirrorlist=|#mirrorlist=|' -e 's|^#baseurl=http://mirror\.centos\.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-Base.repo
             : "Install CentOS Linux packages"
             : "List of packages: http://vault.centos.org/centos/7/os/x86_64/Packages/"
-            yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Test::More)' 'perl(Test::Deep)'
+            yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Pod::Simple::XHTML)' 'perl(Test::More)' 'perl(Test::Deep)'
             cd /work
             ls -l
             export CPPFLAGS="-Wall"
