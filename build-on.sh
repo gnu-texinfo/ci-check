@@ -56,6 +56,8 @@ export top_builddir
 top_srcdir=../
 export top_srcdir
 
+ls -l tp/Texinfo/XS/.libs
+
 ./tp/texi2any --html --no-split -o - ${top_srcdir}/tp/t/input_files/simplest.texi
 ) > log3 2>&1; rc=$?; cat log3; test $rc = 0 || exit 1
 
