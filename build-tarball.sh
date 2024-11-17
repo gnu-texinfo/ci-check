@@ -31,14 +31,14 @@ cd "$package"
 
 # Fetch extra files and generate files.
 date=`date --utc --iso-8601 | sed -e 's/-//g'`
-sed -i -e "/AC_INIT/s/\\([0-9][0-9.]*\\)/\\1-${date}/" configure.ac
-sed -i -e "/AC_INIT/s/\\([0-9][0-9.]*\\)/\\1-${date}/" tp/Texinfo/XS/configure.ac
-sed -i -e "/Welcome to Texinfo documentation viewer/s/\\([0-9][0-9.]*\\)/\\1-${date}/" js/info.js
-sed -i -e "/texi2pdf .GNU Texinfo/s/\\([0-9][0-9.]*\\)/\\1-${date}/" util/pdftexi2dvi
-sed -i -e "/texi2dvi .GNU Texinfo/s/\\([0-9][0-9.]*\\)/\\1-${date}/" util/texi2dvi
-sed -i -e "/texi2pdf .GNU Texinfo/s/\\([0-9][0-9.]*\\)/\\1-${date}/" util/texi2pdf
+sed -i -e "/AC_INIT/s/\\([0-9][0-9.]*\\)/\\1.${date}/" configure.ac
+sed -i -e "/AC_INIT/s/\\([0-9][0-9.]*\\)/\\1.${date}/" tp/Texinfo/XS/configure.ac
+sed -i -e "/Welcome to Texinfo documentation viewer/s/\\([0-9][0-9.]*\\)/\\1.${date}/" js/info.js
+sed -i -e "/texi2pdf .GNU Texinfo/s/\\([0-9][0-9.]*\\)/\\1.${date}/" util/pdftexi2dvi
+sed -i -e "/texi2dvi .GNU Texinfo/s/\\([0-9][0-9.]*\\)/\\1.${date}/" util/texi2dvi
+sed -i -e "/texi2pdf .GNU Texinfo/s/\\([0-9][0-9.]*\\)/\\1.${date}/" util/texi2pdf
 for file in `find tp/Texinfo -name '*.pm'`; do
-  sed -i -e "/VERSION = /s/\\([0-9][0-9.]*\\)/\\1-${date}/" "$file"
+  sed -i -e "/VERSION = /s/\\([0-9][0-9.]*\\)/\\1.${date}/" "$file"
 done
 ./autogen.sh
 
