@@ -46,6 +46,15 @@ $make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || { $make -k > log2a 2>&1; $ma
 
 ls -l tp/Texinfo/XS/.libs
 
+(
+for file in tp/Texinfo/XS/.libs/*.la ; do
+  bfile=`basename $file`
+  echo
+  echo "====================== $bfile"
+  cat $file
+done
+) > all_la_files.txt
+
 # show information on the XS modules used
 (
 TEXINFO_DEV_SOURCE=1
