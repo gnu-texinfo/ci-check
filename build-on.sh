@@ -44,8 +44,10 @@ cd build
 # Build.
 $make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || { $make -k > log2a 2>&1; $make -k > log2b 2>&1; cat log2b; exit 1; }
 
+# show the libraries built.  Could be removed when all the XS modules load.
 ls -l tp/Texinfo/XS/.libs
 
+# collect all the .la files.  Could be removed when all the XS modules load.
 (
 for file in tp/Texinfo/XS/.libs/*.la ; do
   bfile=`basename $file`
@@ -67,7 +69,10 @@ export top_builddir
 top_srcdir=../
 export top_srcdir
 
+# shows the XS modules loading for HTML
 ./tp/texi2any --html --no-split -o - ${top_srcdir}/tp/t/input_files/simplest.texi
+# shows the XS modules loading for Info
+./tp/texi2any -o - ${top_srcdir}/tp/t/input_files/simplest.texi
 ) > log3 2>&1
 rc=$?; cat log3; test $rc = 0 || exit 1
 
