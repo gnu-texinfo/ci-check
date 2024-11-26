@@ -338,6 +338,7 @@ jobs:
       # List of packages: https://formulae.brew.sh/
       - run: ${{ (matrix.os == 'macos-14' || matrix.os == 'macos-15') && 'brew install gettext' || ':' }}
       - run: cpan -i 'Data::Compare' 'Test::Deep'
+      # translations fail in the default case, so pass --enable-xs-perl-libintl
       - run: |
           pwd
           ls -l ${HOMEBREW_PREFIX-/usr/local}/opt
@@ -345,7 +346,7 @@ jobs:
           export LDFLAGS="-L$HOME/lib -L${HOMEBREW_PREFIX-/usr/local}/opt/gettext/lib"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           export PERL_EXT_LDFLAGS="$LDFLAGS"
-          ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
+          ./build-on.sh '${{ env.package }}' '--enable-xs-perl-libintl --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -682,10 +683,6 @@ jobs:
           overwrite: true
   check-cygwin:
     # NOTE 32 bits Cygwin environment is no longer maintained
-    # NOTE for 32 bits Cygwin there is an unexplained failure with missing
-    # symbols.  Eli advice on how to debug, that would require direct access
-    # to the platform:
-    # https://lists.gnu.org/archive/html/bug-texinfo/2024-10/msg00091.html
     name: make check on Cygwin
     #if: ${{ false }}
     needs: build-tarball
@@ -741,10 +738,11 @@ jobs:
       - name: Build in Cygwin
         # We disable tests requiring pseudotty as they fail in the CI.
         # They do not fail when run by the Cygwin Texinfo maintainer.
+        # translations fail in the default case, so pass --enable-xs-perl-libintl
         run: |
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-          ./build-on.sh '${{ env.package }}' '--disable-ptys-tests --enable-additional-checks' 'make'
+          ./build-on.sh '${{ env.package }}' ${{ matrix.bitness == 32 && '--disable-ptys-tests --enable-additional-checks' || '--disable-ptys-tests --enable-xs-perl-libintl --enable-additional-checks' }} 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
