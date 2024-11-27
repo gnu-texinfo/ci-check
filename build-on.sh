@@ -79,4 +79,26 @@ rc=$?; cat log3; test $rc = 0 || exit 1
 # Run the tests.
 $make check > log4 2>&1; rc=$?; cat log4; test $rc = 0 || exit 1
 
+(
+cd tp
+. ./defs
+$PERL -w $srcdir/t/languages.t -c simple_documentlanguage
+
+top_builddir=../
+export top_builddir
+
+$PERL -I . -w $srcdir/texi2any.pl --html -c TEST=1 -o simple_documentlanguage_ref/ t_texis/languages/simple_documentlanguage.texi
+if test -f ./Texinfo/XS/teximakehtml ; then
+  ./Texinfo/XS/teximakehtml -m t_texis/languages/simple_documentlanguage.texi
+
+  grep CCC simple_documentlanguage_html/chap.html
+
+  diff -u -r simple_documentlanguage_ref simple_documentlanguage_html
+else
+  echo '============================== NO teximakehtml'
+fi
+
+cd ..
+)
+
 cd ..
