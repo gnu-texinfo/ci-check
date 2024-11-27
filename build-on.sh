@@ -76,9 +76,6 @@ export top_srcdir
 ) > log3 2>&1
 rc=$?; cat log3; test $rc = 0 || exit 1
 
-# Run the tests.
-$make check > log4 2>&1; rc=$?; cat log4; test $rc = 0 || exit 1
-
 (
 cd tp
 . ./defs
@@ -100,5 +97,8 @@ fi
 
 cd ..
 )
+
+# Run the tests.
+$make check > log4 2>&1; rc=$?; cat log4; test $rc = 0 || exit 1
 
 cd ..
