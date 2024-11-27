@@ -342,7 +342,7 @@ jobs:
           export LDFLAGS="-L$HOME/lib -L${HOMEBREW_PREFIX-/usr/local}/opt/gettext/lib"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           export PERL_EXT_LDFLAGS="$LDFLAGS"
-          ./build-on.sh '${{ env.package }}' '--enable-xs-perl-libintl --enable-additional-checks' 'make'
+          ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -732,7 +732,7 @@ jobs:
         run: |
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-          ./build-on.sh '${{ env.package }}' '--disable-ptys-tests ${{ matrix.bitness == 64 && '--enable-xs-perl-libintl' || '' }} --enable-additional-checks' 'make'
+          ./build-on.sh '${{ env.package }}' '--disable-ptys-tests --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
