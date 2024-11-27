@@ -44,18 +44,18 @@ cd build
 # Build.
 $make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || { $make -k > log2a 2>&1; $make -k > log2b 2>&1; cat log2b; exit 1; }
 
-# show the libraries built.  Could be removed when all the XS modules load.
-ls -l tp/Texinfo/XS/.libs
+## show the libraries built.  Could be removed when all the XS modules load.
+#ls -l tp/Texinfo/XS/.libs
 
-# collect all the .la files.  Could be removed when all the XS modules load.
-(
-for file in tp/Texinfo/XS/.libs/*.la ; do
-  bfile=`basename $file`
-  echo
-  echo "====================== $bfile"
-  cat $file
-done
-) > all_la_files.txt
+## collect all the .la files.  Could be removed when all the XS modules load.
+#(
+#for file in tp/Texinfo/XS/.libs/*.la ; do
+#  bfile=`basename $file`
+#  echo
+#  echo "====================== $bfile"
+#  cat $file
+#done
+#) > all_la_files.txt
 
 # show information on the XS modules used
 (
