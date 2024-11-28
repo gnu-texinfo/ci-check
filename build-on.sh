@@ -79,18 +79,28 @@ rc=$?; cat log3; test $rc = 0 || exit 1
 (
 cd tp
 . ./defs
-$PERL -w $srcdir/t/languages.t -c simple_documentlanguage
+#$PERL -w $srcdir/t/languages.t -c simple_documentlanguage
 
 top_builddir=../
 export top_builddir
 
-$PERL -I . -w $srcdir/texi2any.pl --html -c TEST=1 -o simple_documentlanguage_ref/ t_texis/languages/simple_documentlanguage.texi
+LC_ALL=C
+export LC_ALL
+
+$PERL -I . -w $srcdir/texi2any.pl --html -c TEST=1 -o documentlanguage_ref/ $srcdir/tests/formatting/documentlanguage.texi
 if test -f ./Texinfo/XS/teximakehtml ; then
-  ./Texinfo/XS/teximakehtml -m t_texis/languages/simple_documentlanguage.texi
+  ./Texinfo/XS/teximakehtml -m $srcdir/tests/formatting/documentlanguage.texi
 
-  grep CCC simple_documentlanguage_html/chap.html
+  echo "======== teximakehtml"
+  grep 'printindex-.*index-name-on-class' documentlanguage_html/chapter.html
 
-  diff -u -r simple_documentlanguage_ref simple_documentlanguage_html
+  echo "======== texi2any.pl"
+  grep 'printindex-.*index-name-on-class' documentlanguage_ref/chapter.html
+
+  echo "======== ref"
+  grep 'printindex-.*index-name-on-class' $srcdir/t/results/languages/documentlanguage/res_html/documentlanguage.html
+
+  diff -u -r documentlanguage_ref documentlanguage_html
 else
   echo '============================== NO teximakehtml'
 fi
