@@ -79,6 +79,10 @@ rc=$?; cat log3; test $rc = 0 || exit 1
 (
 cd tp
 . ./defs
+
+echo "=============== ^SAFE_LOCALES"
+$PERL -e 'print "${^SAFE_LOCALES}\n"'
+
 #$PERL -w $srcdir/t/languages.t -c simple_documentlanguage
 
 top_builddir=../
