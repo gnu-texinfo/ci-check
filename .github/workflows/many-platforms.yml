@@ -558,6 +558,8 @@ jobs:
     #if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
+    env:
+      TEXINFO_XS_CONVERT: 1
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4

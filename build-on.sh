@@ -44,19 +44,6 @@ cd build
 # Build.
 $make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || { $make -k > log2a 2>&1; $make -k > log2b 2>&1; cat log2b; exit 1; }
 
-## show the libraries built.  Could be removed when all the XS modules load.
-#ls -l tp/Texinfo/XS/.libs
-
-## collect all the .la files.  Could be removed when all the XS modules load.
-#(
-#for file in tp/Texinfo/XS/.libs/*.la ; do
-#  bfile=`basename $file`
-#  echo
-#  echo "====================== $bfile"
-#  cat $file
-#done
-#) > all_la_files.txt
-
 # show information on the XS modules used
 (
 TEXINFO_DEV_SOURCE=1
@@ -75,42 +62,6 @@ export top_srcdir
 ./tp/texi2any -o - ${top_srcdir}/tp/t/input_files/simplest.texi
 ) > log3 2>&1
 rc=$?; cat log3; test $rc = 0 || exit 1
-
-(
-cd tp
-. ./defs
-
-echo "=============== ^SAFE_LOCALES"
-$PERL -e 'print "${^SAFE_LOCALES}\n"'
-
-#$PERL -w $srcdir/t/languages.t -c simple_documentlanguage
-
-top_builddir=../
-export top_builddir
-
-LC_ALL=C
-export LC_ALL
-
-$PERL -I . -w $srcdir/texi2any.pl --html -c TEST=1 -o documentlanguage_ref/ $srcdir/tests/formatting/documentlanguage.texi
-if test -f ./Texinfo/XS/teximakehtml ; then
-  ./Texinfo/XS/teximakehtml -m $srcdir/tests/formatting/documentlanguage.texi
-
-  echo "======== teximakehtml"
-  grep 'printindex-.*index-name-on-class' documentlanguage_html/chapter.html
-
-  echo "======== texi2any.pl"
-  grep 'printindex-.*index-name-on-class' documentlanguage_ref/chapter.html
-
-  echo "======== ref"
-  grep 'printindex-.*index-name-on-class' $srcdir/t/results/languages/documentlanguage/res_html/documentlanguage.html
-
-  diff -u -r documentlanguage_ref documentlanguage_html
-else
-  echo '============================== NO teximakehtml'
-fi
-
-cd ..
-)
 
 # Run the tests.
 $make check > log4 2>&1; rc=$?; cat log4; test $rc = 0 || exit 1
