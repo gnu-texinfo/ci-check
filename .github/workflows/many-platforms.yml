@@ -332,14 +332,16 @@ jobs:
       # libraries by default.
       # Install Homebrew packages.
       # List of packages: https://formulae.brew.sh/
+      # Note that gettext is in the default set of packages installed by default so the
+      # following is not really needed
       - run: ${{ (matrix.os == 'macos-14' || matrix.os == 'macos-15') && 'brew install gettext' || ':' }}
       - run: cpan -i 'Data::Compare' 'Test::Deep'
       # translations fail in the default case, so pass --enable-xs-perl-libintl
       - run: |
           pwd
           ls -l ${HOMEBREW_PREFIX-/usr/local}/opt
-          export CPPFLAGS="-I$HOME/include -I${HOMEBREW_PREFIX-/usr/local}/opt/gettext/include -Wall"
-          export LDFLAGS="-L$HOME/lib -L${HOMEBREW_PREFIX-/usr/local}/opt/gettext/lib"
+          export CPPFLAGS="-I${HOMEBREW_PREFIX-/usr/local}/opt/gettext/include -Wall"
+          export LDFLAGS="-L${HOMEBREW_PREFIX-/usr/local}/opt/gettext/lib"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           export PERL_EXT_LDFLAGS="$LDFLAGS"
           ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
