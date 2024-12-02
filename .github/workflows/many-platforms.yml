@@ -133,7 +133,7 @@ jobs:
           overwrite: true
   check-linux-gnu-centos:
     name: make check on CentOS GNU/Linux
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -192,7 +192,7 @@ jobs:
           overwrite: true
   check-linux-gnu-alma:
     name: make check on AlmaLinux GNU/Linux
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -251,7 +251,7 @@ jobs:
           overwrite: true
   check-linux-alpine:
     name: make check on Alpine Linux
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -306,7 +306,7 @@ jobs:
           overwrite: true
   check-macos:
     name: make check on macOS
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
@@ -371,7 +371,7 @@ jobs:
           overwrite: true
   check-freebsd:
     name: make check on FreeBSD
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     # The FreeBSD runners sometimes get stuck.
     timeout-minutes: 20
@@ -431,7 +431,7 @@ jobs:
           overwrite: true
   check-netbsd:
     name: make check on NetBSD
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -492,7 +492,7 @@ jobs:
           overwrite: true
   check-openbsd:
     name: make check on OpenBSD
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -618,7 +618,7 @@ jobs:
           overwrite: true
   check-solaris11-omnios:
     name: make check on Solaris 11 OmniOS
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -678,7 +678,7 @@ jobs:
   check-cygwin:
     # NOTE 32 bits Cygwin environment is no longer maintained
     name: make check on Cygwin
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
@@ -778,7 +778,7 @@ jobs:
     # but not with MinGW from MSYS, one because of /dev/null and another
     # because the detected locale is not UTF-8.
     name: check MinGW on Cygwin
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
@@ -976,7 +976,7 @@ jobs:
   # This is not a platform-specific test, but very useful for finding bugs.
   check-sanitized:
     name: make check with sanitizers
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -1036,7 +1036,7 @@ jobs:
   # This is not a platform-specific test, but very useful for finding ISO C23 compliance bugs.
   check-newest-clang:
     name: make check with the newest clang release
-    #if: ${{ false }}
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:

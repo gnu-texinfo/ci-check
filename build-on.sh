@@ -38,6 +38,8 @@ fi
 mkdir build
 cd build
 
+echo "TEXINFO_XS_CONVERT: '$TEXINFO_XS_CONVERT'"
+
 # Configure.
 ../configure --config-cache $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
 
