@@ -41,6 +41,8 @@ on:
 # Variables.
 env:
   package: texinfo
+  # not automatically passed to script, use context property to set
+  TEXINFO_XS_CONVERT: 1
 
 jobs:
   build-tarball:
@@ -106,6 +108,7 @@ jobs:
           pwd
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
+          ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
           ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -586,8 +589,8 @@ jobs:
             env | LC_ALL=C sort
             pwd
             ls -l
-            export TEXINFO_XS_CONVERT=1
-            export CPPFLAGS="-Wall"
+            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+            export CPPFLAGS="-Wall -Wno-unused-function"
             export CC="gcc -m64"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '' 'make'
