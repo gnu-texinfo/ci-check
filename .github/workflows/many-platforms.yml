@@ -41,7 +41,8 @@ on:
 # Variables.
 env:
   package: texinfo
-  # not automatically passed to script, use context property to set
+  # seems to be in the environment, but not automatically passed to script,
+  # maybe because there is no export; use context property to set
   TEXINFO_XS_CONVERT: 1
 
 jobs:
@@ -106,9 +107,9 @@ jobs:
       - run: sudo apt update; sudo apt install libncurses-dev libdata-compare-perl libtest-deep-perl
       - run: |
           pwd
+          ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-          ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
           ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -136,7 +137,7 @@ jobs:
           overwrite: true
   check-linux-gnu-centos:
     name: make check on CentOS GNU/Linux
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -166,6 +167,7 @@ jobs:
             yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Pod::Simple::XHTML)' 'perl(Test::More)' 'perl(Test::Deep)'
             cd /work
             ls -l
+            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
@@ -195,7 +197,7 @@ jobs:
           overwrite: true
   check-linux-gnu-alma:
     name: make check on AlmaLinux GNU/Linux
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -225,6 +227,7 @@ jobs:
             yum -y install make gcc ncurses-devel perl perl-Encode perl-Data-Dumper diffutils
             cd /work
             ls -l
+            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
@@ -254,7 +257,7 @@ jobs:
           overwrite: true
   check-linux-alpine:
     name: make check on Alpine Linux
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -280,6 +283,7 @@ jobs:
             apk add make gcc musl-dev perl-dev ncurses-dev
             cd /work
             ls -l
+            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
@@ -309,7 +313,7 @@ jobs:
           overwrite: true
   check-macos:
     name: make check on macOS
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
@@ -343,6 +347,7 @@ jobs:
       - run: |
           pwd
           ls -l ${HOMEBREW_PREFIX-/usr/local}/opt
+          ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
           export CPPFLAGS="-I${HOMEBREW_PREFIX-/usr/local}/opt/gettext/include -Wall"
           export LDFLAGS="-L${HOMEBREW_PREFIX-/usr/local}/opt/gettext/lib"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -374,7 +379,7 @@ jobs:
           overwrite: true
   check-freebsd:
     name: make check on FreeBSD
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     # The FreeBSD runners sometimes get stuck.
     timeout-minutes: 20
@@ -403,6 +408,7 @@ jobs:
             : "List of packages: https://ports.freebsd.org/cgi/ports.cgi"
             pkg install -y perl5 gettext-runtime p5-Data-Compare p5-Test-Deep
             ls -l
+            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -434,7 +440,7 @@ jobs:
           overwrite: true
   check-netbsd:
     name: make check on NetBSD
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -464,6 +470,7 @@ jobs:
             : /usr/sbin/pkg_add pkgin
             : pkgin install ...
             ls -l
+            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
             export CPPFLAGS="-I/usr/pkg/include -Wall"
             export LDFLAGS="-L/usr/pkg/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -495,7 +502,7 @@ jobs:
           overwrite: true
   check-openbsd:
     name: make check on OpenBSD
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -527,6 +534,7 @@ jobs:
             : "List of packages: https://cdn.openbsd.org/pub/OpenBSD/7.5/packages/amd64/"
             pkg_add gawk help2man p5-Data-Compare p5-Test-Deep
             ls -l
+            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -620,7 +628,7 @@ jobs:
           overwrite: true
   check-solaris11-omnios:
     name: make check on Solaris 11 OmniOS
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -649,6 +657,7 @@ jobs:
             env | LC_ALL=C sort
             pwd
             ls -l
+            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
             export CONFIG_SHELL=/usr/bin/bash
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -680,7 +689,7 @@ jobs:
   check-cygwin:
     # NOTE 32 bits Cygwin environment is no longer maintained
     name: make check on Cygwin
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
@@ -736,6 +745,7 @@ jobs:
         # They do not fail when run by the Cygwin Texinfo maintainer.
         # translations fail in the default case, so pass --enable-xs-perl-libintl
         run: |
+          ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           ./build-on.sh '${{ env.package }}' '--disable-ptys-tests --enable-additional-checks' 'make'
@@ -780,7 +790,7 @@ jobs:
     # but not with MinGW from MSYS, one because of /dev/null and another
     # because the detected locale is not UTF-8.
     name: check MinGW on Cygwin
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     # Doc: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
     strategy:
@@ -978,7 +988,7 @@ jobs:
   # This is not a platform-specific test, but very useful for finding bugs.
   check-sanitized:
     name: make check with sanitizers
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -998,6 +1008,7 @@ jobs:
       - run: sudo apt update; sudo apt install libncurses-dev libdata-compare-perl libtest-deep-perl
       - run: |
           pwd
+          ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
           export CPPFLAGS="-Wall"
           export CC="clang -fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero"
           export CFLAGS="-O0 -fno-omit-frame-pointer -ggdb"
@@ -1038,7 +1049,7 @@ jobs:
   # This is not a platform-specific test, but very useful for finding ISO C23 compliance bugs.
   check-newest-clang:
     name: make check with the newest clang release
-    if: ${{ false }}
+    #if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
@@ -1065,6 +1076,7 @@ jobs:
             apt update; apt -y install libncurses-dev libdata-compare-perl libtest-deep-perl
             cd /work
             ls -l
+            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
             export CC=clang
             export CPPFLAGS="-Wall"
             export PERL_EXT_CC=$CC
