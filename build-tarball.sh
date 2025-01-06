@@ -42,6 +42,8 @@ for file in `find tp/Texinfo -name '*.pm'`; do
 done
 ./autogen.sh
 
+set +e
+
 # Configure (uses package 'file').
 ./configure --config-cache CPPFLAGS="-Wall" > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
 # Build (uses packages make, gcc, ...).
