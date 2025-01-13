@@ -130,7 +130,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -192,7 +192,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -254,7 +254,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -312,7 +312,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -380,7 +380,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -443,7 +443,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -507,7 +507,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -573,7 +573,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -637,7 +637,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -699,7 +699,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -788,7 +788,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -890,7 +890,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -1004,7 +1004,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -1067,7 +1067,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
@@ -1129,7 +1129,7 @@ jobs:
             ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
-            ${{ env.package }}-*/build/install-info/test-suite.log
+            ${{ env.package }}-*/build/install-info/tests/test-suite.log
             ${{ env.package }}-*/build/tp/test-suite.log
             ${{ env.package }}-*/build/tp/tests/test-suite.log
             ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
