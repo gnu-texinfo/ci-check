@@ -58,7 +58,7 @@ jobs:
       - run: pwd
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
-      - run: sudo apt update; sudo apt install gettext help2man texlive-base texlive-latex-base texlive-fonts-recommended ghostscript libncurses-dev libdata-compare-perl libtest-deep-perl
+      - run: sudo apt update; sudo apt install gettext help2man texlive-base texlive-latex-base texlive-fonts-recommended ghostscript libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl
       - run: |
           ./build-tarball.sh '${{ env.package }}'
       # Doc: https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
@@ -106,6 +106,8 @@ jobs:
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
       # - run: sudo apt update; sudo apt install ...
+      # Note that we do not install libperl-dev, so the C main program will
+      # not be compiled.
       - run: sudo apt update; sudo apt install libncurses-dev libdata-compare-perl libtest-deep-perl
       - run: |
           pwd
@@ -1033,7 +1035,7 @@ jobs:
       - run: pwd
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
-      - run: sudo apt update; sudo apt install libncurses-dev libdata-compare-perl libtest-deep-perl
+      - run: sudo apt update; sudo apt install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl
       - run: |
           pwd
           ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
@@ -1103,7 +1105,7 @@ jobs:
             : "Install Debian packages."
             : "List of packages: https://packages.debian.org/"
             : "apt update; apt -y install ..."
-            apt update; apt -y install libncurses-dev libdata-compare-perl libtest-deep-perl
+            apt update; apt -y install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl
             cd /work
             ls -l
             ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
