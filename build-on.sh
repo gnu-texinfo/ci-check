@@ -32,7 +32,7 @@ cd "$packagedir" || exit 1
 
 # Work around a /bin/sh bug on Solaris 11 OmniOS.
 if test "`uname -s`" = SunOS && ! grep 'Oracle Solaris' /etc/release >/dev/null; then
-  sed -i -e '1s|/bin/sh|/usr/bin/bash|' tp/tests/run_parser_all.sh
+  sed -i -e '1s|/bin/sh|/usr/bin/bash|' tta/tests/run_parser_all.sh
 fi
 
 mkdir build
@@ -53,15 +53,15 @@ export TEXINFO_DEV_SOURCE
 TEXINFO_XS=debug
 export TEXINFO_XS
 
-top_builddir=.
-export top_builddir
-top_srcdir=../
-export top_srcdir
+t2a_builddir=./tta
+export t2a_builddir
+t2a_srcdir=../tta
+export t2a_srcdir
 
 # shows the XS modules loading for HTML
-./tp/texi2any --html --no-split -o - ${top_srcdir}/tp/t/input_files/simplest.texi
+./tta/perl/texi2any --html --no-split -o - ${t2a_srcdir}/perl/t/input_files/simplest.texi
 # shows the XS modules loading for Info
-./tp/texi2any -o - ${top_srcdir}/tp/t/input_files/simplest.texi
+./tta/perl/texi2any -o - ${t2a_srcdir}/perl/t/input_files/simplest.texi
 ) > log3 2>&1
 rc=$?; cat log3; test $rc = 0 || exit 1
 

@@ -126,16 +126,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -158,7 +158,7 @@ jobs:
         with:
           image: centos:7
           options: -v ${{ github.workspace }}:/work
-          # No perl(Data::Compare) so tp/t/*.t tests are not checked
+          # No perl(Data::Compare) so tta/perl/t/*.t tests are not checked
           # perl-Test-Harness for prove
           # perl-ExtUtils-ParseXS for xsubpp
           run: |
@@ -188,16 +188,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -220,7 +220,7 @@ jobs:
         with:
           image: almalinux:9
           options: -v ${{ github.workspace }}:/work
-          # No perl-Data-Compare so tp/t/*.t tests are not checked
+          # No perl-Data-Compare so tta/perl/t/*.t tests are not checked
           run: |
             uname -a
             id
@@ -250,16 +250,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -308,16 +308,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -376,16 +376,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -439,16 +439,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -503,16 +503,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -569,16 +569,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -633,16 +633,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -695,16 +695,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -784,16 +784,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -812,7 +812,7 @@ jobs:
     # Currently libncurses is not in cross MinGW packages, such that
     # it is not possible to setup info tests.
     #
-    # Two tests in the tp/tests/ testsuite fail with MinGW from within Cygwin
+    # Two tests in the tta/tests/ testsuite fail with MinGW from within Cygwin
     # but not with MinGW from MSYS, one because of /dev/null and another
     # because the detected locale is not UTF-8.
     name: check MinGW on Cygwin
@@ -886,16 +886,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -1000,16 +1000,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -1063,16 +1063,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
@@ -1125,16 +1125,16 @@ jobs:
             ${{ env.package }}-*/build/config.log
             ${{ env.package }}-*/build/config.status
             ${{ env.package }}-*/build/config.h
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.cache
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.log
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.status
-            ${{ env.package }}-*/build/tp/Texinfo/XS/config.h
+            ${{ env.package }}-*/build/tta/config.cache
+            ${{ env.package }}-*/build/tta/config.log
+            ${{ env.package }}-*/build/tta/config.status
+            ${{ env.package }}-*/build/tta/C/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/test-suite.log
-            ${{ env.package }}-*/build/tp/tests/many_input_files/test-suite.log
+            ${{ env.package }}-*/build/tta/perl/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/test-suite.log
+            ${{ env.package }}-*/build/tta/tests/many_input_files/test-suite.log
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
