@@ -43,8 +43,8 @@ env:
   package: texinfo
   # seems to be in the environment, but not automatically passed to script,
   # maybe because there is no export; use context property to set and export.
-  # Set to 1/0 to test with/without TEXINFO_XS_CONVERT set.
-  TEXINFO_XS_CONVERT: 1
+  # Set to 0 to test without TEXINFO_XS_CONVERT set.
+  #TEXINFO_XS_CONVERT: 0
 
 jobs:
   build-tarball:
@@ -111,7 +111,7 @@ jobs:
       - run: sudo apt update; sudo apt install libncurses-dev libdata-compare-perl libtest-deep-perl
       - run: |
           pwd
-          ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+          ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
@@ -173,7 +173,7 @@ jobs:
             yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Pod::Simple::XHTML)' 'perl(Test::More)' 'perl(Test::Deep)'
             cd /work
             ls -l
-            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+            ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
@@ -235,7 +235,7 @@ jobs:
             yum -y install make gcc ncurses-devel perl perl-Encode perl-Data-Dumper diffutils
             cd /work
             ls -l
-            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+            ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
@@ -293,7 +293,7 @@ jobs:
             apk add make gcc musl-dev perl-dev ncurses-dev
             cd /work
             ls -l
-            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+            ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
@@ -359,7 +359,7 @@ jobs:
       - run: |
           pwd
           ls -l ${HOMEBREW_PREFIX-/usr/local}/opt
-          ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+          ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
           export CPPFLAGS="-I${HOMEBREW_PREFIX-/usr/local}/opt/gettext/include -Wall"
           export LDFLAGS="-L${HOMEBREW_PREFIX-/usr/local}/opt/gettext/lib"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -422,7 +422,7 @@ jobs:
             : "List of packages: https://ports.freebsd.org/cgi/ports.cgi"
             pkg install -y perl5 gettext-runtime p5-Data-Compare p5-Test-Deep
             ls -l
-            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+            ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -486,7 +486,7 @@ jobs:
             : /usr/sbin/pkg_add pkgin
             : pkgin install ...
             ls -l
-            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+            ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-I/usr/pkg/include -Wall"
             export LDFLAGS="-L/usr/pkg/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -552,7 +552,7 @@ jobs:
             : "List of packages: https://cdn.openbsd.org/pub/OpenBSD/7.5/packages/amd64/"
             pkg_add gawk help2man p5-Data-Compare p5-Test-Deep
             ls -l
-            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+            ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -617,7 +617,7 @@ jobs:
             env | LC_ALL=C sort
             pwd
             ls -l
-            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+            ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-Wall -Wno-unused-function"
             export CC="gcc -m64"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -679,7 +679,7 @@ jobs:
             env | LC_ALL=C sort
             pwd
             ls -l
-            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+            ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CONFIG_SHELL=/usr/bin/bash
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -769,7 +769,7 @@ jobs:
         # They do not fail when run by the Cygwin Texinfo maintainer.
         # translations fail in the default case, so pass --enable-xs-perl-libintl
         run: |
-          ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+          ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           ./build-on.sh '${{ env.package }}' '--disable-ptys-tests --enable-additional-checks' 'make'
@@ -870,6 +870,7 @@ jobs:
       - name: Build in Cygwin
         run: |
           set -x
+          ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
           PATH=/usr/${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32/sys-root/mingw/bin:$PATH
           export CC=${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32-gcc
           export CPPFLAGS="-Wall"
@@ -1038,7 +1039,7 @@ jobs:
       - run: sudo apt update; sudo apt install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl
       - run: |
           pwd
-          ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+          ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
           export CPPFLAGS="-Wall"
           export CC="clang -fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero -fno-sanitize-recover=undefined"
           export CFLAGS="-O0 -fno-omit-frame-pointer -ggdb"
@@ -1108,7 +1109,7 @@ jobs:
             apt update; apt -y install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl
             cd /work
             ls -l
-            ${{ env.TEXINFO_XS_CONVERT == 1 && 'export TEXINFO_XS_CONVERT=1' || ':' }}
+            ${{ env.TEXINFO_XS_CONVERT == 0 && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CC=clang
             export CPPFLAGS="-Wall"
             export PERL_EXT_CC=$CC
