@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (C) 2024 Free Software Foundation, Inc.
+# Copyright (C) 2024-2025 Free Software Foundation, Inc.
 #
 # This file is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published
@@ -24,6 +24,11 @@ make="$3"
 
 set -x
 
+case "$configure_options" in
+  --host=riscv*) cross_compiling=true ;;
+  *)             cross_compiling=false ;;
+esac
+
 # Unpack the tarball.
 tarfile=`echo "$package"-*.tar.gz`
 packagedir=`echo "$tarfile" | sed -e 's/\.tar\.gz$//'`
@@ -46,26 +51,28 @@ echo "TEXINFO_XS_CONVERT: '$TEXINFO_XS_CONVERT'"
 # Build.
 $make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || { $make -k > log2a 2>&1; $make -k > log2b 2>&1; cat log2b; exit 1; }
 
-# show information on the XS modules used
-(
-TEXINFO_DEV_SOURCE=1
-export TEXINFO_DEV_SOURCE
-TEXINFO_XS=debug
-export TEXINFO_XS
+if ! $cross_compiling; then
+  # show information on the XS modules used
+  (
+  TEXINFO_DEV_SOURCE=1
+  export TEXINFO_DEV_SOURCE
+  TEXINFO_XS=debug
+  export TEXINFO_XS
 
-t2a_builddir=./tta
-export t2a_builddir
-t2a_srcdir=../tta
-export t2a_srcdir
+  t2a_builddir=./tta
+  export t2a_builddir
+  t2a_srcdir=../tta
+  export t2a_srcdir
 
-# shows the XS modules loading for HTML
-./tta/perl/texi2any --html --no-split -o - ${t2a_srcdir}/perl/t/input_files/simplest.texi
-# shows the XS modules loading for Info
-./tta/perl/texi2any -o - ${t2a_srcdir}/perl/t/input_files/simplest.texi
-) > log3 2>&1
-rc=$?; cat log3; test $rc = 0 || exit 1
+  # shows the XS modules loading for HTML
+  ./tta/perl/texi2any --html --no-split -o - ${t2a_srcdir}/perl/t/input_files/simplest.texi
+  # shows the XS modules loading for Info
+  ./tta/perl/texi2any -o - ${t2a_srcdir}/perl/t/input_files/simplest.texi
+  ) > log3 2>&1
+  rc=$?; cat log3; test $rc = 0 || exit 1
 
-# Run the tests.
-$make check > log4 2>&1; rc=$?; cat log4; test $rc = 0 || exit 1
+  # Run the tests.
+  $make check > log4 2>&1; rc=$?; cat log4; test $rc = 0 || exit 1
+fi
 
 cd ..
