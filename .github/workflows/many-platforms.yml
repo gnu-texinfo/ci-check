@@ -68,7 +68,7 @@ jobs:
       - run: pwd
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
-      - run: sudo apt update; sudo apt install gettext help2man texlive-base texlive-latex-base texlive-fonts-recommended ghostscript libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl
+      - run: sudo apt update; sudo apt install gettext gperf help2man texlive-base texlive-latex-base texlive-fonts-recommended ghostscript libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl
       - run: |
           ./build-tarball.sh '${{ env.package }}'
       # Doc: https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
