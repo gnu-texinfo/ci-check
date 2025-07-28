@@ -759,8 +759,12 @@ jobs:
           # Note that if C++ is compiled, it is important to have gcc-g++
           # explicitely installed, otherwise a MinGW based compiler is found
           # and the build is broken.
+          # All the libraries listed as Perl dependencies in Perl Config
+          # need to be installed, even if their symbols are not used as
+          # otherwise static libraries only are done and the build fails.
+          # This includes libcrypt-devel and libnsl-devel.
           # List of packages: https://cygwin.com/packages/package_list.html
-          packages: gcc-core make perl perl-Data-Compare perl-Test-Deep libncurses-devel libcrypt-devel libiconv-devel libintl-devel
+          packages: gcc-core make perl perl-Data-Compare perl-Test-Deep libncurses-devel libcrypt-devel libnsl-devel libiconv-devel libintl-devel
       - name: cygcheck
         run: cygcheck -V
       - name: cygcheck
