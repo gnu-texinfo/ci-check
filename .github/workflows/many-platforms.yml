@@ -82,6 +82,19 @@ jobs:
             ${{ env.package }}/config.status
             ${{ env.package }}/config.h
             ${{ env.package }}/log[1234]
+            ${{ env.package }}/tta/config.cache
+            ${{ env.package }}/tta/config.log
+            ${{ env.package }}/tta/config.status
+            ${{ env.package }}/tta/C/config.h
+            ${{ env.package }}/info/test-suite.log
+            ${{ env.package }}/install-info/tests/test-suite.log
+            ${{ env.package }}/tta/perl/test-suite.log
+            ${{ env.package }}/tta/swig/perl/test-suite.log
+            ${{ env.package }}/tta/tests/test-suite.log
+            ${{ env.package }}/tta/tests/many_input_files/test-suite.log
+            ${{ env.package }}/Pod-Simple-Texinfo/test-suite.log
+            ${{ env.package }}/texindex/test-suite.log
+            ${{ env.package }}/util/test-suite.log
           retention-days: 28
           overwrite: true
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
