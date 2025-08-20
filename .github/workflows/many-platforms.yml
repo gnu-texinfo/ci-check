@@ -389,7 +389,7 @@ jobs:
       - run: ${{ (matrix.os == 'macos-14' || matrix.os == 'macos-15') && 'brew install gettext' || ':' }}
       - run: cpan -i 'Data::Compare' 'Test::Deep'
       # 'Devel::Cycle'
-      - run: cpan -i 'Devel::Refcount' 'Devel::FindRef'
+      - run: cpan -i 'Devel::Refcount'
       # translations fail in the default case, so pass --enable-xs-perl-libintl
       - run: |
           pwd
@@ -648,10 +648,14 @@ jobs:
           release: '11.4-gcc'
           mem: 2048
           # 'Devel::Cycle'
+          # cpan reads the standard input to get information in the default
+          # case on this platform, eating up the next lines.
+          # Set PERL_MM_USE_DEFAULT to avoid that.
           prepare: |
             : "Install Solaris packages"
             : "List of packages: http://pkg.oracle.com/solaris/release/en/index.shtml"
             pkg install test-deep; ret=$?; test $ret = 0 || test $ret = 4
+            PERL_MM_USE_DEFAULT=1; export PERL_MM_USE_DEFAULT
             cpan -i Clone
             cpan -i 'Data::Compare'
             cpan -i 'Devel::Refcount'
