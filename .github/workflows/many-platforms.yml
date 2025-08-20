@@ -131,7 +131,8 @@ jobs:
       # - run: sudo apt update; sudo apt install ...
       # Note that we do not install libperl-dev, so the C main program will
       # not be compiled.
-      - run: sudo apt update; sudo apt install libncurses-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl libdevel-cycle-perl
+      # libdevel-cycle-perl
+      - run: sudo apt update; sudo apt install libncurses-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl
       - run: cpan -i 'Devel::FindRef'
       - run: |
           pwd
@@ -195,7 +196,8 @@ jobs:
             sed -i -e 's|^mirrorlist=|#mirrorlist=|' -e 's|^#baseurl=http://mirror\.centos\.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-Base.repo
             : "Install CentOS Linux packages"
             : "List of packages: http://vault.centos.org/centos/7/os/x86_64/Packages/"
-            yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Pod::Simple::XHTML)' 'perl(Test::More)' 'perl(Test::Deep)' 'perl(Devel::Peek)' 'perl(Devel::FindRef)' 'perl(Devel::Refcount)' 'perl(Devel::Cycle)'
+            # 'perl(Devel::Cycle)'
+            yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Pod::Simple::XHTML)' 'perl(Test::More)' 'perl(Test::Deep)' 'perl(Devel::Peek)' 'perl(Devel::FindRef)' 'perl(Devel::Refcount)'
             cd /work
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
@@ -317,7 +319,8 @@ jobs:
             pwd
             : "Install Alpine Linux packages"
             : "List of packages: https://pkgs.alpinelinux.org/packages"
-            apk add make gcc musl-dev perl-dev ncurses-dev perl-devel-refcount perl-devel-cycle
+            # perl-devel-cycle
+            apk add make gcc musl-dev perl-dev ncurses-dev perl-devel-refcount
             cd /work
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
@@ -383,7 +386,8 @@ jobs:
       # following is not really needed
       - run: ${{ (matrix.os == 'macos-14' || matrix.os == 'macos-15') && 'brew install gettext' || ':' }}
       - run: cpan -i 'Data::Compare' 'Test::Deep'
-      - run: cpan -i 'Devel::FindRef' 'Devel::Refcount' 'Devel::Cycle'
+      # 'Devel::Cycle'
+      - run: cpan -i 'Devel::Refcount' 'Devel::FindRef'
       # translations fail in the default case, so pass --enable-xs-perl-libintl
       - run: |
           pwd
@@ -450,7 +454,8 @@ jobs:
             pwd
             : "Install FreeBSD packages"
             : "List of packages: https://ports.freebsd.org/cgi/ports.cgi"
-            pkg install -y perl5 gettext-runtime p5-Data-Compare p5-Test-Deep p5-Devel-Refcount p5-Devel-Cycle
+            # p5-Devel-Cycle
+            pkg install -y perl5 gettext-runtime p5-Data-Compare p5-Test-Deep p5-Devel-Refcount
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
@@ -512,7 +517,8 @@ jobs:
             pwd
             : "Install NetBSD packages"
             : "List of packages: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/index-all.html"
-            /usr/sbin/pkg_add perl p5-Data-Compare p5-Test-Deep p5-Clone p5-Devel-Refcount p5-Devel-FindRef p5-Devel-Cycle
+            # p5-Devel-Cycle
+            /usr/sbin/pkg_add perl p5-Data-Compare p5-Test-Deep p5-Clone p5-Devel-Refcount p5-Devel-FindRef
             : "or"
             : /usr/sbin/pkg_add pkgin
             : pkgin install ...
@@ -582,7 +588,8 @@ jobs:
             pwd
             : "Install OpenBSD packages"
             : "List of packages: https://cdn.openbsd.org/pub/OpenBSD/7.6/packages/amd64/"
-            pkg_add gawk help2man p5-Data-Compare p5-Test-Deep p5-Devel-Refcount p5-Devel-FindRef p5-Devel-Cycle
+            # p5-Devel-Cycle
+            pkg_add gawk help2man p5-Data-Compare p5-Test-Deep p5-Devel-Refcount p5-Devel-FindRef
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
@@ -643,7 +650,8 @@ jobs:
             : "List of packages: http://pkg.oracle.com/solaris/release/en/index.shtml"
             pkg install test-deep; ret=$?; test $ret = 0 || test $ret = 4
             cpan -i 'Data::Compare'
-            cpan -i 'Devel::Refcount' 'Devel::FindRef' 'Devel::Cycle'
+            # 'Devel::Cycle'
+            cpan -i 'Devel::Refcount' 'Devel::FindRef'
           run: |
             set -x
             uname -a
@@ -790,7 +798,8 @@ jobs:
           # otherwise static libraries only are done and the build fails.
           # This includes libcrypt-devel and libnsl-devel.
           # List of packages: https://cygwin.com/packages/package_list.html
-          packages: gcc-core make perl perl-Data-Compare perl-Test-Deep perl-Devel-Cycle libncurses-devel libcrypt-devel libnsl-devel libiconv-devel libintl-devel
+          # perl-Devel-Cycle
+          packages: gcc-core make perl perl-Data-Compare perl-Test-Deep libncurses-devel libcrypt-devel libnsl-devel libiconv-devel libintl-devel
       - name: cygcheck
         run: cygcheck -V
       - name: cygcheck
@@ -1079,7 +1088,8 @@ jobs:
       - run: pwd
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
-      - run: sudo apt update; sudo apt install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl libdevel-cycle-perl
+      # libdevel-cycle-perl
+      - run: sudo apt update; sudo apt install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl
       - run: |
           pwd
           ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
@@ -1151,7 +1161,8 @@ jobs:
             : "Install Debian packages."
             : "List of packages: https://packages.debian.org/"
             : "apt update; apt -y install ..."
-            apt update; apt -y install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl libdevel-cycle-perl
+            # libdevel-cycle-perl
+            apt update; apt -y install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl
             cd /work
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
