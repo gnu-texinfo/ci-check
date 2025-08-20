@@ -132,7 +132,7 @@ jobs:
       # Note that we do not install libperl-dev, so the C main program will
       # not be compiled.
       # libdevel-cycle-perl
-      - run: sudo apt update; sudo apt install libncurses-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl
+      - run: sudo apt update; sudo apt install libncurses-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl swig
       - run: cpan -i 'Devel::FindRef'
       - run: |
           pwd
@@ -197,7 +197,7 @@ jobs:
             : "Install CentOS Linux packages"
             : "List of packages: http://vault.centos.org/centos/7/os/x86_64/Packages/"
             # 'perl(Devel::Cycle)'
-            yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Pod::Simple::XHTML)' 'perl(Test::More)' 'perl(Test::Deep)' 'perl(Devel::Peek)' 'perl(Devel::FindRef)' 'perl(Devel::Refcount)'
+            yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Pod::Simple::XHTML)' 'perl(Test::More)' 'perl(Test::Deep)' 'perl(Devel::Peek)' 'perl(Devel::FindRef)' 'perl(Devel::Refcount)' swig
             cd /work
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
@@ -312,6 +312,9 @@ jobs:
           image: alpine:3
           options: -v ${{ github.workspace }}:/work
           # Small distro based on musl, many perl modules not available
+          # perl-devel-cycle
+          # not for the 3.22 version, but for the edge version:
+          #   perl-devel-refcount
           run: |
             uname -a
             id
@@ -319,8 +322,7 @@ jobs:
             pwd
             : "Install Alpine Linux packages"
             : "List of packages: https://pkgs.alpinelinux.org/packages"
-            # perl-devel-cycle
-            apk add make gcc musl-dev perl-dev ncurses-dev perl-devel-refcount
+            apk add make gcc musl-dev perl perl-dev ncurses-dev
             cd /work
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
@@ -455,7 +457,7 @@ jobs:
             : "Install FreeBSD packages"
             : "List of packages: https://ports.freebsd.org/cgi/ports.cgi"
             # p5-Devel-Cycle
-            pkg install -y perl5 gettext-runtime p5-Data-Compare p5-Test-Deep p5-Devel-Refcount
+            pkg install -y perl5 gettext-runtime p5-Data-Compare p5-Test-Deep p5-Devel-Refcount swig
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
@@ -518,7 +520,7 @@ jobs:
             : "Install NetBSD packages"
             : "List of packages: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/index-all.html"
             # p5-Devel-Cycle
-            /usr/sbin/pkg_add perl p5-Data-Compare p5-Test-Deep p5-Clone p5-Devel-Refcount p5-Devel-FindRef
+            /usr/sbin/pkg_add perl p5-Data-Compare p5-Test-Deep p5-Clone p5-Devel-Refcount p5-Devel-FindRef swig4
             : "or"
             : /usr/sbin/pkg_add pkgin
             : pkgin install ...
@@ -589,7 +591,7 @@ jobs:
             : "Install OpenBSD packages"
             : "List of packages: https://cdn.openbsd.org/pub/OpenBSD/7.6/packages/amd64/"
             # p5-Devel-Cycle
-            pkg_add gawk help2man p5-Data-Compare p5-Test-Deep p5-Devel-Refcount p5-Devel-FindRef
+            pkg_add gawk help2man p5-Data-Compare p5-Test-Deep p5-Devel-Refcount p5-Devel-FindRef swig
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
@@ -645,13 +647,15 @@ jobs:
           # - the '11.4-gcc' image, that has gcc installed in /opt/csw/bin.
           release: '11.4-gcc'
           mem: 2048
+          # 'Devel::Cycle'
           prepare: |
             : "Install Solaris packages"
             : "List of packages: http://pkg.oracle.com/solaris/release/en/index.shtml"
             pkg install test-deep; ret=$?; test $ret = 0 || test $ret = 4
+            cpan -i Clone
             cpan -i 'Data::Compare'
-            # 'Devel::Cycle'
-            cpan -i 'Devel::Refcount' 'Devel::FindRef'
+            cpan -i 'Devel::Refcount'
+            cpan -i 'Devel::FindRef'
           run: |
             set -x
             uname -a
@@ -793,13 +797,14 @@ jobs:
           # Note that if C++ is compiled, it is important to have gcc-g++
           # explicitely installed, otherwise a MinGW based compiler is found
           # and the build is broken.
+          # Seems to be the same for swig.
           # All the libraries listed as Perl dependencies in Perl Config
           # need to be installed, even if their symbols are not used as
           # otherwise static libraries only are done and the build fails.
           # This includes libcrypt-devel and libnsl-devel.
           # List of packages: https://cygwin.com/packages/package_list.html
           # perl-Devel-Cycle
-          packages: gcc-core make perl perl-Data-Compare perl-Test-Deep libncurses-devel libcrypt-devel libnsl-devel libiconv-devel libintl-devel
+          packages: gcc-core make perl perl-Data-Compare perl-Test-Deep libncurses-devel libcrypt-devel libnsl-devel libiconv-devel libintl-devel swig
       - name: cygcheck
         run: cygcheck -V
       - name: cygcheck
@@ -1089,7 +1094,7 @@ jobs:
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
       # libdevel-cycle-perl
-      - run: sudo apt update; sudo apt install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl
+      - run: sudo apt update; sudo apt install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl swig
       - run: |
           pwd
           ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
