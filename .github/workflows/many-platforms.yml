@@ -187,6 +187,7 @@ jobs:
           # No perl(Data::Compare) so tta/perl/t/*.t tests are not checked
           # perl-Test-Harness for prove
           # perl-ExtUtils-ParseXS for xsubpp
+          # no perl(Devel::FindRef) nor perl(Devel::Refcount)
           run: |
             uname -a
             id
