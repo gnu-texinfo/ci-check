@@ -599,7 +599,7 @@ jobs:
             export LDFLAGS="-L/usr/local/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             export PERL_EXT_LDFLAGS="$LDFLAGS"
-            ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
+            ./build-on.sh '${{ env.package }}' '--without-swig --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -831,7 +831,7 @@ jobs:
           ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-          ./build-on.sh '${{ env.package }}' '--disable-ptys-tests --enable-additional-checks' 'make'
+          ./build-on.sh '${{ env.package }}' '--without-swig --disable-ptys-tests --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
