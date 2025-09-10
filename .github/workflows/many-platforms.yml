@@ -1180,7 +1180,7 @@ jobs:
             export CPPFLAGS="-Wall"
             export PERL_EXT_CC=$CC
             export PERL_EXT_CPPFLAGS=$CPPFLAGS
-            ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
+            ./build-on.sh '${{ env.package }}' '--enable-additional-checks --enable-xs-perl-libintl' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
