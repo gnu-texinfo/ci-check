@@ -27,10 +27,9 @@ set -e
 
 # Fetch sources (uses package 'git').
 #git clone --depth 1 --branch release/7.1 https://git.savannah.gnu.org/git/"$package".git
-git clone --depth 10 https://git.savannah.gnu.org/git/"$package".git
+git clone --depth 1 https://git.savannah.gnu.org/git/"$package".git
 
 cd "$package"
-git checkout 9d46155400877a21acd9f22a5f207347001b8f98
 
 # Fetch extra files and generate files.
 date=`date --utc --iso-8601 | sed -e 's/-//g'`
