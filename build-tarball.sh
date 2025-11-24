@@ -27,7 +27,8 @@ set -e
 
 # Fetch sources (uses package 'git').
 #git clone --depth 1 --branch release/7.1 https://git.savannah.gnu.org/git/"$package".git
-git clone --depth 1 https://git.savannah.gnu.org/git/"$package".git
+git clone --depth 10 https://git.savannah.gnu.org/git/"$package".git
+git checkout 9db638b66cd1fcaba4e52a8f1a42fdee9602c14f
 
 cd "$package"
 
