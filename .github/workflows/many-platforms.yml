@@ -362,7 +362,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-14, macos-15, macos-26]
+        os: [macos-14, macos-15, macos-26]
     runs-on: ${{ matrix.os }}
     steps:
       # This is needed because we run a script stored in this repository.
@@ -376,7 +376,7 @@ jobs:
       - run: id
       - run: env | LC_ALL=C sort
       - run: pwd
-      # for macos-14 and macos-15 system iconv is found, but is found by
+      # For macos-14 and newer, system iconv is found, but is found by
       # configure not to be a working iconv.  Installing libiconv from
       # brew is not enough to make it work, as brew does not override system
       # libraries by default.
@@ -384,7 +384,7 @@ jobs:
       # List of packages: https://formulae.brew.sh/
       # Note that gettext is in the default set of packages installed by default so the
       # following is not really needed
-      - run: ${{ (matrix.os == 'macos-14' || matrix.os == 'macos-15' || matrix.os == 'macos-26') && 'brew install gettext' || ':' }}
+      - run: ${{ 'brew install gettext' }}
       - run: cpan -i 'Data::Compare' 'Test::Deep'
       # 'Devel::Cycle'
       - run: cpan -i 'Devel::Refcount'
