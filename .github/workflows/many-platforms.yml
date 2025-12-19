@@ -166,7 +166,8 @@ jobs:
           overwrite: true
   check-linux-gnu-centos:
     name: make check on CentOS GNU/Linux
-    #if: ${{ false }}
+    # texinfo now requires GNU make >= 4.0. CentOS 7 has only GNU make 3.82.
+    if: ${{ false }}
     needs: build-tarball
     runs-on: ubuntu-22.04
     steps:
