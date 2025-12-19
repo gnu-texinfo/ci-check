@@ -653,7 +653,7 @@ jobs:
           prepare: |
             : "Install Solaris packages"
             : "List of packages: http://pkg.oracle.com/solaris/release/en/index.shtml"
-            pkg install test-deep; ret=$?; test $ret = 0 || test $ret = 4
+            pkg install gnu-make test-deep; ret=$?; test $ret = 0 || test $ret = 4
             PERL_MM_USE_DEFAULT=1; export PERL_MM_USE_DEFAULT
             cpan -i Clone
             cpan -i 'Data::Compare'
@@ -670,7 +670,7 @@ jobs:
             export CPPFLAGS="-Wall -Wno-unused-function"
             export CC="gcc -m64"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-            ./build-on.sh '${{ env.package }}' '' 'make'
+            ./build-on.sh '${{ env.package }}' '' 'gmake'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
