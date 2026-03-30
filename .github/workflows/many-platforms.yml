@@ -314,6 +314,8 @@ jobs:
           # perl-devel-cycle
           # not for the 3.22 version, but for the edge version:
           #   perl-devel-refcount
+          # The musl gettext does not support sertting the language with
+          # the LANGUAGE variable, so pass --enable-xs-perl-libintl
           run: |
             uname -a
             id
@@ -327,7 +329,7 @@ jobs:
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-            ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
+            ./build-on.sh '${{ env.package }}' '--enable-xs-perl-libintl --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
