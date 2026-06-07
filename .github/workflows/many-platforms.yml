@@ -136,7 +136,7 @@ jobs:
           ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-          ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
+          ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -266,7 +266,7 @@ jobs:
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-            ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
+            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -330,7 +330,7 @@ jobs:
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-            ./build-on.sh '${{ env.package }}' '--enable-xs-perl-libintl --enable-additional-checks' 'make'
+            ./build-on.sh '${{ env.package }}' '--enable-xs-perl-libintl --enable-using-c-texi2any --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -391,7 +391,6 @@ jobs:
       - run: cpan -i 'Data::Compare' 'Test::Deep'
       # 'Devel::Cycle'
       - run: cpan -i 'Devel::Refcount'
-      # translations fail in the default case, so pass --enable-xs-perl-libintl
       - run: |
           pwd
           ls -l ${HOMEBREW_PREFIX-/usr/local}/opt
@@ -465,7 +464,7 @@ jobs:
             export LDFLAGS="-L/usr/local/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             export PERL_EXT_LDFLAGS="$LDFLAGS"
-            ./build-on.sh '${{ env.package }}' '' 'make'
+            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -531,7 +530,7 @@ jobs:
             export LDFLAGS="-L/usr/pkg/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             export PERL_EXT_LDFLAGS="$LDFLAGS"
-            ./build-on.sh '${{ env.package }}' '' 'make'
+            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -599,7 +598,7 @@ jobs:
             export LDFLAGS="-L/usr/local/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             export PERL_EXT_LDFLAGS="$LDFLAGS"
-            ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
+            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -672,7 +671,7 @@ jobs:
             export CPPFLAGS="-Wall -Wno-unused-function"
             export CC="gcc -m64"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-            ./build-on.sh '${{ env.package }}' '' 'gmake'
+            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any' 'gmake'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -735,7 +734,7 @@ jobs:
             export CONFIG_SHELL=/usr/bin/bash
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-            ./build-on.sh '${{ env.package }}' '' 'gmake'
+            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any' 'gmake'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -1180,7 +1179,7 @@ jobs:
             export CPPFLAGS="-Wall"
             export PERL_EXT_CC=$CC
             export PERL_EXT_CPPFLAGS=$CPPFLAGS
-            ./build-on.sh '${{ env.package }}' '--enable-additional-checks --enable-xs-perl-libintl' 'make'
+            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --enable-additional-checks --enable-xs-perl-libintl' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
