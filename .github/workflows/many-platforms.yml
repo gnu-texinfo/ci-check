@@ -248,6 +248,7 @@ jobs:
           image: almalinux:9
           options: -v ${{ github.workspace }}:/work
           # No perl-Data-Compare so tta/perl/t/*.t tests are not checked
+          # No swig.
           run: |
             uname -a
             id
@@ -323,7 +324,7 @@ jobs:
             pwd
             : "Install Alpine Linux packages"
             : "List of packages: https://pkgs.alpinelinux.org/packages"
-            apk add make gcc musl-dev perl perl-dev ncurses-dev
+            apk add make gcc musl-dev perl perl-dev ncurses-dev swig
             cd /work
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
@@ -386,8 +387,7 @@ jobs:
       # Install Homebrew packages.
       # List of packages: https://formulae.brew.sh/
       # Note that gettext is in the default set of packages installed by default so the
-      # following is not really needed
-      - run: ${{ 'brew install gettext' }}
+      - run: ${{ 'brew install swig' }}
       - run: cpan -i 'Data::Compare' 'Test::Deep'
       # 'Devel::Cycle'
       - run: cpan -i 'Devel::Refcount'
@@ -599,7 +599,7 @@ jobs:
             export LDFLAGS="-L/usr/local/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             export PERL_EXT_LDFLAGS="$LDFLAGS"
-            ./build-on.sh '${{ env.package }}' '--without-swig --enable-additional-checks' 'make'
+            ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -723,7 +723,7 @@ jobs:
             : "List of packages: https://pkg.omnios.org/r151048/core/en/index.shtml"
             pkg install \
                 developer/gcc13 developer/object-file system/header system/library/math \
-                developer/build/gnu-make
+                developer/build/gnu-make developer/swig
           run: |
             set -x
             uname -a
@@ -831,7 +831,7 @@ jobs:
           ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-          ./build-on.sh '${{ env.package }}' '--without-swig --enable-using-c-texi2any --disable-ptys-tests --enable-additional-checks' 'make'
+          ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --disable-ptys-tests --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -872,9 +872,9 @@ jobs:
     # Currently libncurses is not in cross MinGW packages, such that
     # it is not possible to setup info tests.
     #
-    # Two tests in the tta/tests/ testsuite fail with MinGW from within Cygwin
-    # but not with MinGW from MSYS, one because of /dev/null and another
-    # because the detected locale is not UTF-8.
+    # Pod-Simple-Texinfo check fails because of the carriage return issue,
+    # native Perl output the number of tests, but the tap test driver
+    # awk cannot read it because of the carriage return.
     name: check MinGW on Cygwin
     #if: ${{ false }}
     needs: build-tarball
@@ -1172,7 +1172,7 @@ jobs:
             : "List of packages: https://packages.debian.org/"
             : "apt update; apt -y install ..."
             # libdevel-cycle-perl
-            apt update; apt -y install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl
+            apt update; apt -y install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl swig
             cd /work
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
@@ -1227,7 +1227,7 @@ jobs:
       - run: pwd
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
-      - run: sudo apt update; sudo apt install gcc-riscv64-linux-gnu
+      - run: sudo apt update; sudo apt install gcc-riscv64-linux-gnu swig
       - run: |
           pwd
           ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
