@@ -55,7 +55,7 @@ env:
 
 jobs:
   build-tarball:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -110,7 +110,7 @@ jobs:
     name: make check on Ubuntu GNU/Linux
     #if: ${{ false }}
     needs: build-tarball
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -169,7 +169,7 @@ jobs:
     # texinfo now requires GNU make >= 4.0. CentOS 7 has only GNU make 3.82.
     if: ${{ false }}
     needs: build-tarball
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -234,7 +234,7 @@ jobs:
     name: make check on AlmaLinux GNU/Linux
     #if: ${{ false }}
     needs: build-tarball
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -298,7 +298,7 @@ jobs:
     name: make check on Alpine Linux
     #if: ${{ false }}
     needs: build-tarball
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -433,7 +433,7 @@ jobs:
     needs: build-tarball
     # The FreeBSD runners sometimes get stuck.
     timeout-minutes: 20
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -496,7 +496,7 @@ jobs:
     name: make check on NetBSD
     #if: ${{ false }}
     needs: build-tarball
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -562,7 +562,7 @@ jobs:
     name: make check on OpenBSD
     #if: ${{ false }}
     needs: build-tarball
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -630,7 +630,7 @@ jobs:
     name: make check on Solaris 11
     #if: ${{ false }}
     needs: build-tarball
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -703,7 +703,7 @@ jobs:
     name: make check on Solaris 11 OmniOS
     #if: ${{ false }}
     needs: build-tarball
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -1147,7 +1147,7 @@ jobs:
     name: make check with the newest clang release
     #if: ${{ false }}
     needs: build-tarball
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
@@ -1211,7 +1211,7 @@ jobs:
   check-cross:
     name: make check with a cross-compiler
     needs: build-tarball
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # This is needed because we run a script stored in this repository.
       - uses: actions/checkout@v4
