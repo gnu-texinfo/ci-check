@@ -52,6 +52,8 @@ env:
   # URL prefix suitable for downloading individual files through 'wget'
   #gnulib_url_prefix: https://gitweb.git.savannah.gnu.org/gitweb/?p=gnulib.git;a=blob_plain;hb=HEAD;f=
   gnulib_url_prefix: https://raw.githubusercontent.com/coreutils/gnulib/refs/heads/master/
+  # Mirror of ftp.gnu.org
+  ftp_gnu_org: mirrors.ocf.berkeley.edu
 
 jobs:
   build-tarball:
@@ -67,6 +69,10 @@ jobs:
       # List of packages: https://packages.ubuntu.com/
       - run: sudo apt update; sudo apt install gettext gperf help2man texlive-base texlive-latex-base texlive-fonts-recommended ghostscript libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl
       - run: |
+          wget -O autoconf-2.73.tar.gz https://${{ env.ftp_gnu_org }}/gnu/autoconf/autoconf-2.73.tar.gz
+          tar xfz autoconf-2.73.tar.gz && cd autoconf-2.73 && ./configure --prefix=/usr && make && sudo make install && cd ..
+          wget -O automake-1.18.tar.gz https://${{ env.ftp_gnu_org }}/gnu/automake/automake-1.18.tar.gz
+          tar xfz automake-1.18.tar.gz && cd automake-1.18 && ./configure --prefix=/usr && make && sudo make install && cd ..
           ./build-tarball.sh '${{ env.package }}'
       # Doc: https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ failure() }}
@@ -1114,7 +1120,7 @@ jobs:
           msystem: ${{ case(matrix.cpu == 'arm64', 'CLANGARM64', matrix.compiler == 'clang', 'CLANG64', matrix.crt == 'ucrt', 'UCRT64', 'MINGW64') }}
           update: true
           # List of packages: https://packages.msys2.org/search
-          install: automake1.18 autoconf2.73 make diffutils
+          install: make diffutils
                    ${{ case(matrix.cpu == 'arm64',      'mingw-w64-clang-aarch64-clang',
                             matrix.compiler == 'clang', 'mingw-w64-clang-x86_64-clang',
                             matrix.crt == 'ucrt',       'mingw-w64-ucrt-x86_64-gcc',
