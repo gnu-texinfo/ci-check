@@ -46,10 +46,14 @@ cd build
 echo "TEXINFO_XS_CONVERT: '$TEXINFO_XS_CONVERT'"
 
 # Configure.
-../configure --config-cache $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
+#../configure --config-cache $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
+../configure --config-cache $configure_options; rc=$?; test $rc = 0 || exit 1
+
+echo "configure done, now doing $make"
 
 # Build.
-$make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || { $make -k > log2a 2>&1; $make -k > log2b 2>&1; cat log2b; exit 1; }
+#$make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || { $make -k > log2a 2>&1; $make -k > log2b 2>&1; cat log2b; exit 1; }
+$make; rc=$?; test $rc = 0 || exit 1
 
 if ! $cross_compiling; then
   # show information on the XS modules used
