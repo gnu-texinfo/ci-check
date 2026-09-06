@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (C) 2024-2025 Free Software Foundation, Inc.
+# Copyright (C) 2024-2026 Free Software Foundation, Inc.
 #
 # This file is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published
@@ -28,6 +28,9 @@ set -e
 # Fetch sources (uses package 'git').
 #git clone --depth 1 --branch release/7.1 https://git.savannah.gnu.org/git/"$package".git
 git clone --depth 1 https://git.savannah.gnu.org/git/"$package".git
+
+# Apply patches.
+(cd "$package" && patch -p1 < ../patches/0001-info-Fix-compilation-error-on-mingw-with-an-ISO-C23-.patch)
 
 cd "$package"
 

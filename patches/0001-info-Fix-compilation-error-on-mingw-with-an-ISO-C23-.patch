@@ -1,0 +1,28 @@
+From d1093ea4d3d6a3e6232d39fc30e41247d6ab2fb3 Mon Sep 17 00:00:00 2001
+From: Bruno Haible <bruno@clisp.org>
+Date: Sun, 6 Sep 2026 07:43:46 +0200
+Subject: [PATCH] info: Fix compilation error on mingw with an ISO C23
+ compiler.
+
+* info/signals.c (signal_info): Define as a function that takes an 'int'
+parameter.
+---
+ info/signals.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/info/signals.c b/info/signals.c
+index cb6a5670ac..b3200bbe8f 100644
+--- a/info/signals.c
++++ b/info/signals.c
+@@ -107,7 +107,7 @@ restore_termsig (int sig, const signal_info *saved)
+   sigaction (sig, saved, NULL);
+ }
+ #else /* !HAVE_SIGACTION */
+-typedef void (*signal_info) ();
++typedef void (*signal_info) (int);
+ #define set_termsig(sig, old) (void)(*(old) = signal (sig, info_signal_proc))
+ #define restore_termsig(sig, saved) (void)signal (sig, *(saved))
+ #endif /* !HAVE_SIGACTION */
+-- 
+2.53.0
+
