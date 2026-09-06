@@ -1,0 +1,54 @@
+From fe66e9d6df95f76d4a9daf20e63fa13c7defc861 Mon Sep 17 00:00:00 2001
+From: Bruno Haible <bruno@clisp.org>
+Date: Sun, 6 Sep 2026 12:15:58 +0200
+Subject: [PATCH 2/2] tta: Fix compilation error on mingw with an ISO C23
+ compiler.
+
+* tta/C/texi2any.c (EXEC_CONST): New macro.
+(main): Use it for argv.
+---
+ tta/C/texi2any.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/tta/C/texi2any.c b/tta/C/texi2any.c
+index be8f9f30b6..bccb7314d8 100644
+--- a/tta/C/texi2any.c
++++ b/tta/C/texi2any.c
+@@ -113,6 +113,14 @@
+ # define PATH_SEP      ":"
+ #endif /* not O_BINARY */
+ 
++/* for dealing with differences between execvp() (POSIX) and
++   _execvp() (Windows) */
++#ifdef _WIN32
++# define EXEC_CONST const
++#else
++# define EXEC_CONST
++#endif
++
+ static const char *conf_file_name = "texi2any-config.pm";
+ 
+ typedef struct FORMAT_COMMAND_LINE_NAME {
+@@ -3927,7 +3935,7 @@ main (int argc, char *argv[], char *env[])
+ 
+   if (call_texi2dvi && texi2dvi)
+     {
+-      char **argv;
++      EXEC_CONST char **argv;
+       size_t i;
+ 
+       if (debug)
+@@ -3936,7 +3944,9 @@ main (int argc, char *argv[], char *env[])
+           fprintf (stderr, "EXEC %s\n", texi2dvi_call);
+           free (texi2dvi_call);
+         }
+-      argv = (char **) malloc ((texi2dvi_args.number +1) * sizeof (char *));
++      argv
++        = (EXEC_CONST char **)
++          malloc ((texi2dvi_args.number + 1) * sizeof (EXEC_CONST char *));
+       for (i = 0; i < texi2dvi_args.number; i++)
+         argv[i] = strdup (texi2dvi_args.list[i]);
+       argv[texi2dvi_args.number] = NULL;
+-- 
+2.53.0
+

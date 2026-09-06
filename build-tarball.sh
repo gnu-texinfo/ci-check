@@ -31,6 +31,7 @@ git clone --depth 1 https://git.savannah.gnu.org/git/"$package".git
 
 # Apply patches.
 (cd "$package" && patch -p1 < ../patches/0001-info-Fix-compilation-error-on-mingw-with-an-ISO-C23-.patch)
+(cd "$package" && patch -p1 < ../patches/0002-tta-Fix-compilation-error-on-mingw-with-an-ISO-C23-c.patch)
 
 cd "$package"
 
