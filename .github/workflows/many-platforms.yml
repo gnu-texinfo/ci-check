@@ -52,8 +52,6 @@ env:
   # URL prefix suitable for downloading individual files through 'wget'
   #gnulib_url_prefix: https://gitweb.git.savannah.gnu.org/gitweb/?p=gnulib.git;a=blob_plain;hb=HEAD;f=
   gnulib_url_prefix: https://raw.githubusercontent.com/coreutils/gnulib/refs/heads/master/
-  # Mirror of ftp.gnu.org
-  ftp_gnu_org: mirrors.ocf.berkeley.edu
 
 jobs:
   build-tarball:
@@ -69,10 +67,6 @@ jobs:
       # List of packages: https://packages.ubuntu.com/
       - run: sudo apt update; sudo apt install gettext gperf help2man texlive-base texlive-latex-base texlive-fonts-recommended ghostscript libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl
       - run: |
-          wget -O autoconf-2.73.tar.gz https://${{ env.ftp_gnu_org }}/gnu/autoconf/autoconf-2.73.tar.gz
-          tar xfz autoconf-2.73.tar.gz && cd autoconf-2.73 && ./configure --prefix=/usr && make && sudo make install && cd ..
-          wget -O automake-1.18.tar.gz https://${{ env.ftp_gnu_org }}/gnu/automake/automake-1.18.tar.gz
-          tar xfz automake-1.18.tar.gz && cd automake-1.18 && ./configure --prefix=/usr && make && sudo make install && cd ..
           ./build-tarball.sh '${{ env.package }}'
       # Doc: https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ failure() }}
@@ -1140,13 +1134,15 @@ jobs:
       - run: ${{ matrix.compiler }} -v -v
       - run: echo '#include <stdio.h>' | ${{ matrix.compiler }} -E -dM - | grep UCRT
       - run: echo 'int main () {}' > a.c; ${{ matrix.compiler }} a.c; objdump -p a.exe | grep DLL; rm a.exe
+      # MSYS2_ARG_CONV_EXCL='*' avoids that configure hangs during execution
+      # of a here-document while creating config.status.
       - name: Build in MSYS2
         run: |
           set -x
           export CPPFLAGS="-Wall"
           export CC=${{ matrix.compiler }}
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-          ./build-on.sh '${{ env.package }}' '--host=${{ case(matrix.cpu == 'arm64', 'aarch64', 'x86_64') }}-w64-mingw32 --enable-additional-checks' 'make'
+          env MSYS2_ARG_CONV_EXCL='*' ./build-on.sh '${{ env.package }}' '--host=${{ case(matrix.cpu == 'arm64', 'aarch64', 'x86_64') }}-w64-mingw32 --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
