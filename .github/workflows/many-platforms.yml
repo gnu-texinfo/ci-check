@@ -1092,6 +1092,10 @@ jobs:
             compiler: gcc
           - compiler: clang
             crt: msvcrt
+          # Skip a build that hangs during the execution of 'configure'.
+          - cpu: x86_64
+            compiler: gcc
+            crt: msvcrt
     # Doc: https://docs.github.com/en/actions/reference/workflows-and-actions/expressions
     runs-on: ${{ case(matrix.cpu == 'arm64', 'windows-11-arm', 'windows-2022') }}
     defaults:
