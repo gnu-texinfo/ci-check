@@ -129,7 +129,7 @@ jobs:
       # Note that we do not install libperl-dev, so the C main program will
       # not be compiled.
       # libdevel-cycle-perl
-      - run: sudo apt update; sudo apt install libncurses-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl swig
+      - run: sudo apt update; sudo apt install libncurses-dev libtext-diff-perl libdata-compare-perl libtest-deep-perl libdevel-refcount-perl swig
       - run: cpan -i 'Devel::FindRef'
       - run: |
           pwd
@@ -260,7 +260,7 @@ jobs:
             : "                  https://repo.almalinux.org/almalinux/9/CRB/x86_64/os/Packages/"
             : "                  https://repo.almalinux.org/almalinux/9/devel/x86_64/os/Packages/"
             : "Explanation: https://wiki.almalinux.org/repos/AlmaLinux.html"
-            yum -y install make gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Devel-Peek diffutils
+            yum -y install make gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Devel-Peek perl-Text-Diff diffutils
             cd /work
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
@@ -315,7 +315,7 @@ jobs:
           # perl-devel-cycle
           # not for the 3.22 version, but for the edge version:
           #   perl-devel-refcount
-          # The musl gettext does not support sertting the language with
+          # The musl gettext does not support setting the language with
           # the LANGUAGE variable, so pass --enable-xs-perl-libintl
           run: |
             uname -a
@@ -324,7 +324,7 @@ jobs:
             pwd
             : "Install Alpine Linux packages"
             : "List of packages: https://pkgs.alpinelinux.org/packages"
-            apk add make gcc musl-dev perl perl-dev ncurses-dev swig
+            apk add make gcc musl-dev perl perl-dev ncurses-dev perl-text-diff swig
             cd /work
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
@@ -388,7 +388,7 @@ jobs:
       # List of packages: https://formulae.brew.sh/
       # Note that gettext is in the default set of packages installed by default so the
       - run: ${{ 'brew install swig' }}
-      - run: cpan -i 'Data::Compare' 'Test::Deep'
+      - run: cpan -i 'Text::Diff' 'Data::Compare' 'Test::Deep'
       # 'Devel::Cycle'
       - run: cpan -i 'Devel::Refcount'
       - run: |
@@ -457,7 +457,7 @@ jobs:
             : "Install FreeBSD packages"
             : "List of packages: https://ports.freebsd.org/cgi/ports.cgi"
             # p5-Devel-Cycle
-            pkg install -y perl5 gettext-runtime p5-Data-Compare p5-Test-Deep p5-Devel-Refcount swig
+            pkg install -y perl5 gettext-runtime p5-Text-Diff p5-Data-Compare p5-Test-Deep p5-Devel-Refcount swig
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
@@ -520,7 +520,7 @@ jobs:
             : "Install NetBSD packages"
             : "List of packages: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/index-all.html"
             # p5-Devel-Cycle
-            /usr/sbin/pkg_add perl p5-Data-Compare p5-Test-Deep p5-Clone p5-Devel-Refcount p5-Devel-FindRef swig4
+            /usr/sbin/pkg_add perl p5-Text-Diff p5-Data-Compare p5-Test-Deep p5-Clone p5-Devel-Refcount p5-Devel-FindRef swig4
             : "or"
             : /usr/sbin/pkg_add pkgin
             : pkgin install ...
@@ -589,9 +589,9 @@ jobs:
             env | LC_ALL=C sort
             pwd
             : "Install OpenBSD packages"
-            : "List of packages: https://cdn.openbsd.org/pub/OpenBSD/7.6/packages/amd64/"
+            : "List of packages: https://cloudflare.cdn.openbsd.org/pub/OpenBSD/7.7/packages/amd64/"
             # p5-Devel-Cycle
-            pkg_add gawk help2man p5-Data-Compare p5-Test-Deep p5-Devel-Refcount p5-Devel-FindRef swig
+            pkg_add gawk help2man p5-Text-Diff p5-Data-Compare p5-Test-Deep p5-Devel-Refcount p5-Devel-FindRef swig
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
@@ -657,6 +657,7 @@ jobs:
             set +e; pkg install gnu-make test-deep; ret=$?; test $ret = 0 || test $ret = 4
             PERL_MM_USE_DEFAULT=1; export PERL_MM_USE_DEFAULT
             cpan -i Clone
+            cpan -i 'Text::Diff'
             cpan -i 'Data::Compare'
             cpan -i 'Devel::Refcount'
             cpan -i 'Devel::FindRef'
@@ -808,7 +809,7 @@ jobs:
           # This includes libcrypt-devel and libnsl-devel.
           # List of packages: https://cygwin.com/packages/package_list.html
           # perl-Devel-Cycle
-          packages: gcc-core make perl perl-Data-Compare perl-Test-Deep libncurses-devel libcrypt-devel libnsl-devel libiconv-devel libintl-devel swig
+          packages: gcc-core make perl perl-Text-Diff perl-Data-Compare perl-Test-Deep libncurses-devel libcrypt-devel libnsl-devel libiconv-devel libintl-devel swig
       - name: cygcheck
         run: cygcheck -V
       - name: cygcheck
@@ -1195,7 +1196,7 @@ jobs:
       # Install Ubuntu packages.
       # List of packages: https://packages.ubuntu.com/
       # libdevel-cycle-perl
-      - run: sudo apt update; sudo apt install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl swig
+      - run: sudo apt update; sudo apt install libncurses-dev libperl-dev libtext-diff-perl libdata-compare-perl libtest-deep-perl libdevel-refcount-perl swig
       - run: |
           pwd
           ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
@@ -1268,7 +1269,7 @@ jobs:
             : "List of packages: https://packages.debian.org/"
             : "apt update; apt -y install ..."
             # libdevel-cycle-perl
-            apt update; apt -y install libncurses-dev libperl-dev libdata-compare-perl libtest-deep-perl libdevel-refcount-perl swig
+            apt update; apt -y install libncurses-dev libperl-dev libtext-diff-perl libdata-compare-perl libtest-deep-perl libdevel-refcount-perl swig
             cd /work
             ls -l
             ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
