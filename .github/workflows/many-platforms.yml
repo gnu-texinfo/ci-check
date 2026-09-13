@@ -781,7 +781,9 @@ jobs:
       CYGWIN_NOWINPATH: 1
     # The cygwin-64 runner got stuck before probably because of issues with
     # info tests with pseudotty.
-    timeout-minutes: 35
+    # It needs a long time to run, 15 minutes for compilation 15 minutes for
+    # checks
+    timeout-minutes: 45
     steps:
       # This is needed because we run a script stored in this repository.
       - run: git config --global core.autocrlf input
@@ -816,17 +818,16 @@ jobs:
         run: cygcheck -s -r
       - name: Windows version
         run: cmd /c ver
-      - run: uname -a
-      - run: id
+      #- run: uname -a
+      #- run: id
       - run: env | LC_ALL=C sort
       - run: pwd
-      - run: ls -l
+      #- run: ls -l
       - run: echo "$PATH"
-      - run: ls -l /usr/bin
+      #- run: ls -l /usr/bin
       - name: Build in Cygwin
         # We disable tests requiring pseudotty as they fail in the CI.
         # They do not fail when run by the Cygwin Texinfo maintainer.
-        # translations fail in the default case, so pass --enable-xs-perl-libintl
         run: |
           ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
           export CPPFLAGS="-Wall"
