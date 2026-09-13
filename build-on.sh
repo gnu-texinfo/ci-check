@@ -46,7 +46,12 @@ cd build
 echo "TEXINFO_XS: '$TEXINFO_XS'"
 
 # Configure.
-../configure --config-cache $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
+# using a cache file with --config-cache is handy as it is easy to determine
+# what configure found in the cache file.  However, it does not work well for
+# Texinfo, as the main and tta directory should use different compiler and
+# flags since in tta they should be compatible with flags and compiler used
+# to build Perl.
+../configure $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
 
 # Build.
 $make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || { $make -k > log2a 2>&1; $make -k > log2b 2>&1; cat log2b; exit 1; }
