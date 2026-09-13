@@ -43,7 +43,7 @@ fi
 mkdir build
 cd build
 
-echo "TEXINFO_XS_CONVERT: '$TEXINFO_XS_CONVERT'"
+echo "TEXINFO_XS: '$TEXINFO_XS'"
 
 # Configure.
 ../configure --config-cache $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1

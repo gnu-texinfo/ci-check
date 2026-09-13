@@ -41,14 +41,14 @@ on:
 # Variables.
 env:
   package: texinfo
-  # TEXINFO_XS_CONVERT is not set as an env variable directly, because
+  # TEXINFO_XS is not set as an env variable directly, because
   # env variables seems to be in the environment, but not automatically
   # passed to scripts, maybe because there is no export.  Use context
   # property to set and export.  Avoid a context property that is compared
   # to a number and in particular to 0 because GitHub performs loose equality
   # comparisons with automatic casting and conversion, often to 0, prefer
   # strings yes/no
-  unset_xs_convert: no
+  set_xs_omit: no
   # URL prefix suitable for downloading individual files through 'wget'
   #gnulib_url_prefix: https://gitweb.git.savannah.gnu.org/gitweb/?p=gnulib.git;a=blob_plain;hb=HEAD;f=
   gnulib_url_prefix: https://raw.githubusercontent.com/coreutils/gnulib/refs/heads/master/
@@ -133,7 +133,7 @@ jobs:
       - run: cpan -i 'Devel::FindRef'
       - run: |
           pwd
-          ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+          ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --enable-additional-checks' 'make'
@@ -199,7 +199,7 @@ jobs:
             yum -y install make file gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Unicode-String perl-Test-Harness perl-ExtUtils-ParseXS 'perl(Pod::Simple::PullParser)' 'perl(Pod::Simple::XHTML)' 'perl(Test::More)' 'perl(Test::Deep)' 'perl(Devel::Peek)' 'perl(Devel::FindRef)' 'perl(Devel::Refcount)' swig
             cd /work
             ls -l
-            ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+            ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '--enable-additional-checks' 'make'
@@ -263,7 +263,7 @@ jobs:
             yum -y install make gcc ncurses-devel perl perl-Encode perl-Data-Dumper perl-Devel-Peek perl-Text-Diff diffutils
             cd /work
             ls -l
-            ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+            ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --enable-additional-checks' 'make'
@@ -327,7 +327,7 @@ jobs:
             apk add make gcc musl-dev perl perl-dev ncurses-dev perl-text-diff swig
             cd /work
             ls -l
-            ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+            ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             ./build-on.sh '${{ env.package }}' '--enable-xs-perl-libintl --enable-using-c-texi2any --enable-additional-checks' 'make'
@@ -394,7 +394,7 @@ jobs:
       - run: |
           pwd
           ls -l ${HOMEBREW_PREFIX-/usr/local}/opt
-          ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+          ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
           export CPPFLAGS="-I${HOMEBREW_PREFIX-/usr/local}/opt/gettext/include -Wall"
           export LDFLAGS="-L${HOMEBREW_PREFIX-/usr/local}/opt/gettext/lib"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -459,7 +459,7 @@ jobs:
             # p5-Devel-Cycle
             pkg install -y perl5 gettext-runtime p5-Text-Diff p5-Data-Compare p5-Test-Deep p5-Devel-Refcount swig
             ls -l
-            ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+            ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -525,7 +525,7 @@ jobs:
             : /usr/sbin/pkg_add pkgin
             : pkgin install ...
             ls -l
-            ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+            ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
             export CPPFLAGS="-I/usr/pkg/include -Wall"
             export LDFLAGS="-L/usr/pkg/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -593,7 +593,7 @@ jobs:
             # p5-Devel-Cycle
             pkg_add gawk help2man p5-Text-Diff p5-Data-Compare p5-Test-Deep p5-Devel-Refcount p5-Devel-FindRef swig
             ls -l
-            ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+            ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
             export CPPFLAGS="-I/usr/local/include -Wall"
             export LDFLAGS="-L/usr/local/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -668,7 +668,7 @@ jobs:
             env | LC_ALL=C sort
             pwd
             ls -l
-            ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+            ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
             export CPPFLAGS="-Wall -Wno-unused-function"
             export CC="gcc -m64"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -731,7 +731,7 @@ jobs:
             env | LC_ALL=C sort
             pwd
             ls -l
-            ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+            ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
             export CONFIG_SHELL=/usr/bin/bash
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
@@ -829,7 +829,7 @@ jobs:
         # We disable tests requiring pseudotty as they fail in the CI.
         # They do not fail when run by the Cygwin Texinfo maintainer.
         run: |
-          ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+          ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --disable-ptys-tests --enable-additional-checks' 'make'
@@ -931,7 +931,7 @@ jobs:
       - name: Build in Cygwin
         run: |
           set -x
-          ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+          ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
           PATH=/usr/${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32/sys-root/mingw/bin:$PATH
           export CC=${{ matrix.bitness == 32 && 'i686' || 'x86_64' }}-w64-mingw32-gcc
           export CPPFLAGS="-Wall"
@@ -1200,7 +1200,7 @@ jobs:
       - run: sudo apt update; sudo apt install libncurses-dev libperl-dev libtext-diff-perl libdata-compare-perl libtest-deep-perl libdevel-refcount-perl swig
       - run: |
           pwd
-          ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+          ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
           export CPPFLAGS="-Wall"
           export CC="clang -fsanitize=address,undefined,signed-integer-overflow,shift,integer-divide-by-zero -fno-sanitize-recover=undefined"
           export CFLAGS="-O0 -fno-omit-frame-pointer -ggdb"
@@ -1273,7 +1273,7 @@ jobs:
             apt update; apt -y install libncurses-dev libperl-dev libtext-diff-perl libdata-compare-perl libtest-deep-perl libdevel-refcount-perl swig
             cd /work
             ls -l
-            ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+            ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
             export CC=clang
             export CPPFLAGS="-Wall"
             export PERL_EXT_CC=$CC
@@ -1328,7 +1328,7 @@ jobs:
       - run: sudo apt update; sudo apt install gcc-riscv64-linux-gnu swig
       - run: |
           pwd
-          ${{ env.unset_xs_convert == 'yes' && 'export TEXINFO_XS_CONVERT=0' || ':' }}
+          ${{ env.set_xs_omit == 'yes' && 'export TEXINFO_XS=omit' || ':' }}
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           export CC="riscv64-linux-gnu-gcc"
