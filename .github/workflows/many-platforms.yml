@@ -445,7 +445,7 @@ jobs:
       # Doc: https://github.com/vmactions/freebsd-vm
       - uses: vmactions/freebsd-vm@v1
         with:
-          release: '14.0'
+          release: '15.1'
           mem: 1024
           usesh: true
           run: |
@@ -508,7 +508,7 @@ jobs:
       # Doc: https://github.com/vmactions/netbsd-vm
       - uses: vmactions/netbsd-vm@v1
         with:
-          release: '10.0'
+          release: '11.0'
           mem: 1024
           usesh: true
           run: |
@@ -574,7 +574,7 @@ jobs:
       # Doc: https://github.com/vmactions/openbsd-vm
       - uses: vmactions/openbsd-vm@v1
         with:
-          release: '7.7'
+          release: '7.9'
           mem: 1024
           usesh: true
           # Avoid 'sync: sshfs' since it causes trouble with file timestamps
@@ -589,7 +589,7 @@ jobs:
             env | LC_ALL=C sort
             pwd
             : "Install OpenBSD packages"
-            : "List of packages: https://cloudflare.cdn.openbsd.org/pub/OpenBSD/7.7/packages/amd64/"
+            : "List of packages: https://cloudflare.cdn.openbsd.org/pub/OpenBSD/7.9/packages/amd64/"
             # p5-Devel-Cycle
             pkg_add gawk help2man p5-Text-Diff p5-Data-Compare p5-Test-Deep p5-Devel-Refcount p5-Devel-FindRef swig
             ls -l
