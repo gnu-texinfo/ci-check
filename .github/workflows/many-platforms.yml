@@ -1121,11 +1121,11 @@ jobs:
           update: true
           # List of packages: https://packages.msys2.org/search
           install: make diffutils
-                   ${{ case(matrix.cpu == 'arm64',      'mingw-w64-clang-aarch64-clang',
-                            matrix.compiler == 'clang', 'mingw-w64-clang-x86_64-clang',
-                            matrix.crt == 'ucrt',       'mingw-w64-ucrt-x86_64-gcc',
-                                                        'mingw-w64-x86_64-gcc')
-                    }}
+                   ${{ case(matrix.cpu == 'arm64',      'mingw-w64-clang-aarch64-clang mingw-w64-clang-aarch64-perl mingw-w64-clang-aarch64-perl-text-diff mingw-w64-clang-aarch64-perl-data-compare mingw-w64-clang-aarch64-ncurses mingw-w64-clang-aarch64-libiconv mingw-w64-clang-aarch64-swig',
+                            matrix.compiler == 'clang', 'mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-perl mingw-w64-clang-x86_64-perl-text-diff mingw-w64-clang-x86_64-perl-data-compare mingw-w64-clang-x86_64-ncurses mingw-w64-clang-x86_64-libiconv mingw-w64-clang-x86_64-swig',
+                            matrix.crt == 'ucrt',       'mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-perl mingw-w64-ucrt-x86_64-perl-text-diff mingw-w64-ucrt-x86_64-perl-data-compare mingw-w64-ucrt-x86_64-ncurses mingw-w64-ucrt-x86_64-libiconv mingw-w64-ucrt-x86_64-swig',
+                                                        'mingw-w64-x86_64-gcc perl-text-diff mingw-w64-perl-data-compare mingw-w64-x86_64-ncurses mingw-w64-x86_64-libiconv mingw-w64-x86_64-swig')
+                    }} perl-devel perl-test-deep ncurses-devel libiconv-devel libintl gettext-devel libxcrypt libxcrypt-devel
       - name: Windows version
         run: cmd /c ver
       - run: uname -a
