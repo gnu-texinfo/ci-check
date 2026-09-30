@@ -77,7 +77,11 @@ if ! $cross_compiling; then
   rc=$?; cat log3; test $rc = 0 || exit 1
 
   # Run the tests.
-  $make check > log4 2>&1; rc=$?; cat log4; test $rc = 0 || exit 1
+  $make check > log4 2>&1; rc=$?; cat log4
+  (
+   cd tta/perl && ../../../tta/maintain/all_tests.sh diff
+  ) > tta_perl_check.diff
+  test $rc = 0 || exit 1
 fi
 
 cd ..
