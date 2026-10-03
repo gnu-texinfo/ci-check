@@ -82,7 +82,7 @@ jobs:
             ${{ env.package }}/tta/config.cache
             ${{ env.package }}/tta/config.log
             ${{ env.package }}/tta/config.status
-            ${{ env.package }}/tta/C/config.h
+            ${{ env.package }}/tta/config.h
             ${{ env.package }}/info/test-suite.log
             ${{ env.package }}/install-info/tests/test-suite.log
             ${{ env.package }}/tta/perl/test-suite.log
@@ -151,7 +151,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -218,7 +218,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -283,7 +283,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -348,7 +348,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -418,7 +418,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -484,7 +484,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -551,7 +551,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -620,7 +620,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -695,7 +695,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -759,7 +759,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -857,7 +857,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -962,7 +962,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -1078,7 +1078,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -1176,7 +1176,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -1188,6 +1188,7 @@ jobs:
             ${{ env.package }}-*/build/Pod-Simple-Texinfo/test-suite.log
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
+            ${{ env.package }}-*/build/tta_perl_results.tar.gz
           retention-days: 28
           overwrite: true
   # This is not a platform-specific test, but very useful for finding bugs.
@@ -1242,7 +1243,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -1308,7 +1309,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[1234]
             ${{ env.package }}-*/build/info/test-suite.log
             ${{ env.package }}-*/build/install-info/tests/test-suite.log
@@ -1363,7 +1364,7 @@ jobs:
             ${{ env.package }}-*/build/tta/config.cache
             ${{ env.package }}-*/build/tta/config.log
             ${{ env.package }}-*/build/tta/config.status
-            ${{ env.package }}-*/build/tta/C/config.h
+            ${{ env.package }}-*/build/tta/config.h
             ${{ env.package }}-*/build/log[12]
           retention-days: 28
           overwrite: true
