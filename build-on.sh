@@ -84,10 +84,11 @@ if ! $cross_compiling; then
    export srcdir
    ../../../tta/maintain/all_tests.sh diff
   ) > tta_perl_check.diff
-  # sometime the diff does not work, in case of failure, get the whole
-  # tta/perl/t/results
+  # sometime the diff does not give anything or is difficult to interpret,
+  # in case of failure, get the whole tta/perl/t/results and tta/tests
   if test $rc != 0; then
     tar czf tta_perl_results.tar.gz tta/perl/t/results
+    tar czf tta_tests.tar.gz tta/tests
     exit 1
   fi
 fi

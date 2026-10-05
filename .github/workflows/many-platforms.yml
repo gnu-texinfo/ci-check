@@ -1189,6 +1189,7 @@ jobs:
             ${{ env.package }}-*/build/texindex/test-suite.log
             ${{ env.package }}-*/build/util/test-suite.log
             ${{ env.package }}-*/build/tta_perl_results.tar.gz
+            ${{ env.package }}-*/build/tta_tests.tar.gz
           retention-days: 28
           overwrite: true
   # This is not a platform-specific test, but very useful for finding bugs.
