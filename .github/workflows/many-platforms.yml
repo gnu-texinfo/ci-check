@@ -526,7 +526,7 @@ jobs:
             : "Install NetBSD packages"
             : "List of packages: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/index-all.html"
             # p5-Devel-Cycle
-            /usr/sbin/pkg_add perl p5-Text-Diff p5-Data-Compare p5-Test-Deep p5-Clone p5-Devel-Refcount p5-Devel-FindRef swig4
+            /usr/sbin/pkg_add perl p5-Text-Diff p5-Data-Compare p5-Test-Deep p5-Clone p5-Devel-Refcount p5-Devel-FindRef
             : "or"
             : /usr/sbin/pkg_add pkgin
             : pkgin install ...
