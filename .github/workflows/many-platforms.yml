@@ -469,7 +469,7 @@ jobs:
             export LDFLAGS="-L/usr/local/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             export PERL_EXT_LDFLAGS="$LDFLAGS"
-            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any' 'make'
+            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -536,7 +536,7 @@ jobs:
             export LDFLAGS="-L/usr/pkg/lib"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
             export PERL_EXT_LDFLAGS="$LDFLAGS"
-            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any' 'make'
+            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --enable-additional-checks' 'make'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -680,7 +680,7 @@ jobs:
             export CPPFLAGS="-Wall -Wno-unused-function"
             export CC="gcc -m64"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any' 'gmake'
+            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --enable-additional-checks' 'gmake'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
@@ -744,7 +744,7 @@ jobs:
             export CONFIG_SHELL=/usr/bin/bash
             export CPPFLAGS="-Wall"
             export PERL_EXT_CPPFLAGS="$CPPFLAGS"
-            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any' 'gmake'
+            ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --enable-additional-checks' 'gmake'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}

@@ -51,7 +51,7 @@ echo "TEXINFO_XS: '$TEXINFO_XS'"
 # Texinfo, as the main and tta directory should use different compiler and
 # flags since in tta they should be compatible with flags and compiler used
 # to build Perl.
-../configure --disable-xs $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
+../configure --disable-perl-xs $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
 
 # Build.
 $make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || { $make -k > log2a 2>&1; $make -k > log2b 2>&1; cat log2b; exit 1; }
@@ -87,8 +87,12 @@ if ! $cross_compiling; then
   # sometime the diff does not give anything or is difficult to interpret,
   # in case of failure, get the whole tta/perl/t/results and tta/tests
   if test $rc != 0; then
-    tar czf tta_perl_results.tar.gz tta/perl/t/results
-    tar czf tta_tests.tar.gz tta/tests
+    if test -d tta/perl/t/results ; then
+      tar czf tta_perl_results.tar.gz tta/perl/t/results
+    fi
+    if test -d tta/tests ; then
+      tar czf tta_tests.tar.gz tta/tests
+    fi
     exit 1
   fi
 fi
