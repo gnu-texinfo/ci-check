@@ -1153,8 +1153,9 @@ jobs:
       - run: ${{ matrix.compiler }} -v -v
       - run: echo '#include <stdio.h>' | ${{ matrix.compiler }} -E -dM - | grep UCRT
       - run: echo 'int main () {}' > a.c; ${{ matrix.compiler }} a.c; objdump -p a.exe | grep DLL; rm a.exe
-      # MSYS2_ARG_CONV_EXCL='*' avoids that configure hangs during execution
-      # of a here-document while creating config.status.
+      # MSYS2_ARG_CONV_EXCL='*' may avoid that configure hangs during execution
+      # of a here-document while creating config.status, but it cannot be
+      # left as some command fail with that setup.
       - name: Build in MSYS2
         run: |
           set -x
