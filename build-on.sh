@@ -54,8 +54,19 @@ echo "TEXINFO_XS: '$TEXINFO_XS'"
 ../configure --disable-perl-xs $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
 
 # Build.
-$make > log2 2>&1; rc=$?; cat log2; test $rc = 0 || { $make -k > log2a 2>&1; $make -k > log2b 2>&1; cat log2b; exit 1; }
+$make > log2 2>&1; rc=$?; cat log2
 
+if test $rc != 0; then
+  if test -d tta/C ; then
+    tar czf tta_C.tar.gz tta/C
+  fi
+  if test -d tta/perl/XSTexinfo ; then
+    tar czf tta_perl_XSTexinfo.tar.gz tta/perl/XSTexinfo
+  fi
+  $make -k > log2a 2>&1; $make -k > log2b 2>&1; cat log2b; exit 1;
+fi
+
+  # Run the tests.
 if ! $cross_compiling; then
   # show information on the XS modules used
   (
@@ -76,23 +87,22 @@ if ! $cross_compiling; then
   ) > log3 2>&1
   rc=$?; cat log3; test $rc = 0 || exit 1
 
-  # Run the tests.
   $make check > log4 2>&1; rc=$?; cat log4
-  (
-   cd tta/perl
-   srcdir=../../../tta/perl
-   export srcdir
-   ../../../tta/maintain/all_tests.sh diff
-  ) > tta_perl_check.diff
-  # sometime the diff does not give anything or is difficult to interpret,
-  # in case of failure, get the whole tta/perl/t/results and tta/tests
+  #(
+  # cd tta/perl
+  # srcdir=../../../tta/perl
+  # export srcdir
+  # ../../../tta/maintain/all_tests.sh diff
+  #) > tta_perl_check.diff
+  ## sometime the diff does not give anything or is difficult to interpret,
+  ## in case of failure, get the whole tta/perl/t/results and tta/tests
   if test $rc != 0; then
-    if test -d tta/perl/t/results ; then
-      tar czf tta_perl_results.tar.gz tta/perl/t/results
-    fi
-    if test -d tta/tests ; then
-      tar czf tta_tests.tar.gz tta/tests
-    fi
+  #  if test -d tta/perl/t/results ; then
+  #    tar czf tta_perl_results.tar.gz tta/perl/t/results
+  #  fi
+  #  if test -d tta/tests ; then
+  #    tar czf tta_tests.tar.gz tta/tests
+  #  fi
     exit 1
   fi
 fi
