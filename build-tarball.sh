@@ -34,6 +34,8 @@ git clone --depth 1 https://git.savannah.gnu.org/git/"$package".git
 
 cd "$package"
 
+git show --summary
+
 # Fetch extra files and generate files.
 date=`date --utc --iso-8601 | sed -e 's/-//g'`
 sed -i -e "/AC_INIT/s/\\([0-9][0-9.]*\\)/\\1.${date}/" configure.ac
