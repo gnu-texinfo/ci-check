@@ -21,6 +21,7 @@
 package="$1"
 configure_options="$2"
 make="$3"
+added_ltlib_ldflags="$4"
 
 set -x
 
@@ -54,7 +55,7 @@ echo "TEXINFO_XS: '$TEXINFO_XS'"
 ../configure --disable-perl-xs $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
 
 # Build.
-$make > log2 2>&1; rc=$?; cat log2
+$make ADDED_LTLIB_LDFLAGS="$added_ltlib_ldflags" > log2 2>&1; rc=$?; cat log2
 
 if test $rc != 0; then
   if test -d tta/C ; then
@@ -63,7 +64,8 @@ if test $rc != 0; then
   if test -d tta/perl/XSTexinfo ; then
     tar czf tta_perl_XSTexinfo.tar.gz tta/perl/XSTexinfo
   fi
-  $make -k > log2a 2>&1; $make -k > log2b 2>&1; cat log2b; exit 1;
+  $make -k ADDED_LTLIB_LDFLAGS="$added_ltlib_ldflags" > log2a 2>&1
+  $make -k ADDED_LTLIB_LDFLAGS="$added_ltlib_ldflags" > log2b 2>&1; cat log2b; exit 1;
 fi
 
   # Run the tests.

@@ -833,7 +833,7 @@ jobs:
           export CPPFLAGS="-Wall"
           export PERL_EXT_CPPFLAGS="$CPPFLAGS"
           ./build-on.sh '${{ env.package }}' '--enable-using-c-texi2any --disable-ptys-tests --enable-additional-checks' \
-              'make ADDED_LTLIB_LDFLAGS="-Wl,--enable-auto-import -Wl,--export-all-symbols"'
+              'make' '-Wl,--enable-auto-import -Wl,--export-all-symbols'
       # Doc: https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
       #      https://github.com/actions/upload-artifact?tab=readme-ov-file#usage
       - if: ${{ always() }}
