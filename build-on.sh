@@ -52,7 +52,7 @@ echo "TEXINFO_XS: '$TEXINFO_XS'"
 # Texinfo, as the main and tta directory should use different compiler and
 # flags since in tta they should be compatible with flags and compiler used
 # to build Perl.
-../configure --disable-perl-xs $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
+../configure $configure_options > log1 2>&1; rc=$?; cat log1; test $rc = 0 || exit 1
 
 # Build.
 $make ADDED_LTLIB_LDFLAGS="$added_ltlib_ldflags" > log2 2>&1; rc=$?; cat log2

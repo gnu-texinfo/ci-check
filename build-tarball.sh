@@ -34,7 +34,7 @@ git clone --depth 1 https://git.savannah.gnu.org/git/"$package".git
 
 cd "$package"
 
-git show --summary
+git show -s
 
 # Fetch extra files and generate files.
 date=`date --utc --iso-8601 | sed -e 's/-//g'`
